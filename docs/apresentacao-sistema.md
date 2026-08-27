@@ -26,57 +26,57 @@ O sistema utiliza uma arquitetura web em camadas. O frontend foi desenvolvido co
 
 architecture-beta
 
-&#x20;   group presentation(cloud)\[Camada de apresentação]
+    group presentation(cloud)[Camada de apresentação]
 
-&#x20;   group application(server)\[Camada de aplicação]
+    group application(server)[Camada de aplicação]
 
-&#x20;   group persistence(database)\[Camada de persistência]
+    group persistence(database)[Camada de persistência]
 
-&#x20;   group integrations(internet)\[Integrações externas]
-
-
-
-&#x20;   service browser(internet)\[Navegador] in presentation
-
-&#x20;   service frontend(server)\[React + TypeScript + Vite] in presentation
+    group integrations(internet)[Integrações externas]
 
 
 
-&#x20;   service api(server)\[API REST Node.js + Express] in application
+    service browser(internet)[Navegador] in presentation
 
-&#x20;   service auth(server)\[Autenticação JWT] in application
-
-&#x20;   service orm(server)\[Sequelize ORM] in application
+    service frontend(server)[React + TypeScript + Vite] in presentation
 
 
 
-&#x20;   service mysql(database)\[Banco de dados MySQL] in persistence
+    service api(server)[API REST Node.js + Express] in application
 
-&#x20;   service uploads(disk)\[Imagens public/uploads] in persistence
+    service auth(server)[Autenticação JWT] in application
 
-
-
-&#x20;   service trends(internet)\[Wikimedia Pageviews] in integrations
-
-&#x20;   service news(internet)\[Bing Notícias] in integrations
+    service orm(server)[Sequelize ORM] in application
 
 
 
-&#x20;   browser:R --> L:frontend
+    service mysql(database)[Banco de dados MySQL] in persistence
 
-&#x20;   frontend:R --> L:api
+    service uploads(disk)[Imagens public/uploads] in persistence
 
-&#x20;   api:B --> T:auth
 
-&#x20;   api:B --> T:orm
 
-&#x20;   orm:B --> T:mysql
+    service trends(internet)[Wikimedia Pageviews] in integrations
 
-&#x20;   api:B --> T:uploads
+    service news(internet)[Bing Notícias] in integrations
 
-&#x20;   api:R --> L:trends
 
-&#x20;   api:R --> L:news
+
+    browser:R --> L:frontend
+
+    frontend:R --> L:api
+
+    api:B --> T:auth
+
+    api:B --> T:orm
+
+    orm:B --> T:mysql
+
+    api:B --> T:uploads
+
+    api:R --> L:trends
+
+    api:R --> L:news
 
 ```
 
