@@ -88,7 +88,7 @@ Na camada de apresentação, o navegador carrega a interface React construída p
 
 ## Como executar o sistema
 
-Para testar o Swiftline no seu computador, confira primeiro se o Node.js (com npm), o MySQL e o Git estão instalados. Depois, siga os passos abaixo.
+Para testar o Swiftline  primeiro se o Node.js (com npm), o MySQL e o Git estão instalados. Depois, é necessário  seguir os passos abaixo:
 
 ### 1. Baixe o projeto
 
@@ -127,14 +127,14 @@ DB_USER=root
 DB_PASSWORD=sua_senha_do_mysql
 DB_NAME=swiftline
 PORT=3000
-JWT_SECRET=substitua_por_uma_chave_secreta_forte
+JWT_SECRET=substitua_por_uma_chave_secreta
 ```
 
-Troque a senha e a chave secreta pelos valores que você realmente pretende usar. Como esse arquivo guarda informações privadas, ele não deve ser enviado ao GitHub.
+Troque a senha e a chave secreta pelos valores que pretende usar.
 
 ### 5. Rode o Swiftline
 
-Agora é só iniciar o projeto:
+Iniciar o projeto:
 
 ```bash
 npm run dev
@@ -144,7 +144,7 @@ Quando o servidor estiver pronto, abra [http://localhost:3000](http://localhost:
 
 ### 6. Confira a compilação
 
-Se quiser confirmar que o projeto está compilando sem erros, execute:
+Para confirmar que o projeto está compilando sem erros, execute:
 
 ```bash
 npm run build
