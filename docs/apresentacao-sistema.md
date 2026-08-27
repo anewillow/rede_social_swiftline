@@ -88,131 +88,67 @@ Na camada de apresentação, o navegador carrega a interface React construída p
 
 ## Como executar o sistema
 
+Para testar o Swiftline no seu computador, confira primeiro se o Node.js (com npm), o MySQL e o Git estão instalados. Depois, siga os passos abaixo.
 
+### 1. Baixe o projeto
 
-### Pré-requisitos
-
-
-
-- Node.js e npm instalados;
-
-- MySQL instalado e em execução;
-
-- Git instalado.
-
-
-
-### 1. Clonar o repositório
-
-
+Abra o terminal, clone o repositório e entre na pasta criada:
 
 ```bash
-
 git clone https://github.com/anewillow/rede_social_swiftline.git
-
 cd rede_social_swiftline
-
 ```
 
+### 2. Instale as dependências
 
-
-### 2. Instalar as dependências
-
-
+Já dentro da pasta do projeto, instale os pacotes necessários:
 
 ```bash
-
 npm install
-
 ```
 
+### 3. Prepare o banco de dados
 
-
-### 3. Criar o banco de dados
-
-
-
-No MySQL, execute:
-
-
+Com o MySQL em execução, crie o banco que será usado pela aplicação:
 
 ```sql
-
 CREATE DATABASE swiftline
-
-CHARACTER SET utf8mb4
-
-COLLATE utf8mb4_unicode_ci;
-
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
 ```
 
+### 4. Configure a conexão
 
-
-### 4. Configurar as variáveis de ambiente
-
-
-
-Crie um arquivo `.env` na raiz do projeto:
-
-
+Na raiz do projeto, crie um arquivo chamado `.env` e informe os dados do seu MySQL:
 
 ```env
-
 DB_HOST=localhost
-
 DB_USER=root
-
 DB_PASSWORD=sua_senha_do_mysql
-
 DB_NAME=swiftline
-
 PORT=3000
-
 JWT_SECRET=substitua_por_uma_chave_secreta_forte
-
 ```
 
+Troque a senha e a chave secreta pelos valores que você realmente pretende usar. Como esse arquivo guarda informações privadas, ele não deve ser enviado ao GitHub.
 
+### 5. Rode o Swiftline
 
-O arquivo `.env` contém informações privadas e não deve ser enviado ao GitHub.
-
-
-
-### 5. Iniciar o sistema
-
-
+Agora é só iniciar o projeto:
 
 ```bash
-
 npm run dev
-
 ```
 
+Quando o servidor estiver pronto, abra [http://localhost:3000](http://localhost:3000) no navegador.
 
+### 6. Confira a compilação
 
-A aplicação ficará disponível em:
-
-
-
-```text
-
-http://localhost:3000
-
-```
-
-
-
-### 6. Verificar a compilação
-
-
+Se quiser confirmar que o projeto está compilando sem erros, execute:
 
 ```bash
-
 npm run build
-
 ```
 
-
-
-Esse comando verifica o código TypeScript e gera a versão compilada do frontend no diretório `client-dist/`.
+Além de verificar o código TypeScript, esse comando gera a versão final do frontend na pasta `client-dist/`.
 
