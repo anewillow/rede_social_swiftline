@@ -1,8 +1,8 @@
-\# Etapa 1 — Apresentação do Sistema
+# Etapa 1 — Apresentação do Sistema
 
 
 
-\## Descrição breve do sistema
+## Descrição breve do sistema
 
 
 
@@ -14,7 +14,7 @@ A plataforma também permite curtir, comentar, repostar, salvar e compartilhar p
 
 
 
-\## Arquitetura resumida
+## Arquitetura resumida
 
 
 
@@ -86,37 +86,37 @@ Na camada de apresentação, o navegador carrega a interface React construída p
 
 
 
-\## Como executar o sistema
+## Como executar o sistema
 
 
 
-\### Pré-requisitos
+### Pré-requisitos
 
 
 
-\- Node.js e npm instalados;
+- Node.js e npm instalados;
 
-\- MySQL instalado e em execução;
+- MySQL instalado e em execução;
 
-\- Git instalado.
+- Git instalado.
 
 
 
-\### 1. Clonar o repositório
+### 1. Clonar o repositório
 
 
 
 ```bash
 
-git clone https://github.com/anewillow/rede\_social\_swiftline.git
+git clone https://github.com/anewillow/rede_social_swiftline.git
 
-cd rede\_social\_swiftline
+cd rede_social_swiftline
 
 ```
 
 
 
-\### 2. Instalar as dependências
+### 2. Instalar as dependências
 
 
 
@@ -128,7 +128,7 @@ npm install
 
 
 
-\### 3. Criar o banco de dados
+### 3. Criar o banco de dados
 
 
 
@@ -142,13 +142,13 @@ CREATE DATABASE swiftline
 
 CHARACTER SET utf8mb4
 
-COLLATE utf8mb4\_unicode\_ci;
+COLLATE utf8mb4_unicode_ci;
 
 ```
 
 
 
-\### 4. Configurar as variáveis de ambiente
+### 4. Configurar as variáveis de ambiente
 
 
 
@@ -158,17 +158,17 @@ Crie um arquivo `.env` na raiz do projeto:
 
 ```env
 
-DB\_HOST=localhost
+DB_HOST=localhost
 
-DB\_USER=root
+DB_USER=root
 
-DB\_PASSWORD=sua\_senha\_do\_mysql
+DB_PASSWORD=sua_senha_do_mysql
 
-DB\_NAME=swiftline
+DB_NAME=swiftline
 
 PORT=3000
 
-JWT\_SECRET=substitua\_por\_uma\_chave\_secreta\_forte
+JWT_SECRET=substitua_por_uma_chave_secreta_forte
 
 ```
 
@@ -178,7 +178,7 @@ O arquivo `.env` contém informações privadas e não deve ser enviado ao GitHu
 
 
 
-\### 5. Iniciar o sistema
+### 5. Iniciar o sistema
 
 
 
@@ -202,7 +202,7 @@ http://localhost:3000
 
 
 
-\### 6. Verificar a compilação
+### 6. Verificar a compilação
 
 
 
