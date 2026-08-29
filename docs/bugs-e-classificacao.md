@@ -1,43 +1,31 @@
 # Etapa 2 — Identificação e Classificação de Bugs
 
-Nesta etapa, o código do sistema foi revisado para identificar três bugs reais. Cada problema foi classificado de acordo com as categorias indicadas no enunciado do trabalho.
-
 ## 2.1 Classificação dos bugs
 
 ### Bug 1 — Vulnerabilidade de negação de serviço no Multer
 
 **Tipo:** Dependência vulnerável  
-**Local:** `package.json`, `package-lock.json` e uso do Multer em `src/app.ts`  
-**Ferramenta utilizada:** Dependabot alerts — alerta #14
+**Local:** `package.json` e `package-lock.json` — dependência `multer`, versão `2.0.2`  
+**Descrição:** O Dependabot alertou que a versão utilizada do Multer é afetada pela vulnerabilidade **CVE-2026-3520**, de gravidade alta (8,7/10). Versões anteriores à `2.1.1` permitem que um atacante provoque uma negação de serviço (DoS) por meio do envio de solicitações malformadas, podendo causar estouro de pilha. A vulnerabilidade é corrigida na versão `2.1.1`, e o Dependabot recomenda a atualização para a versão `2.2.0` ou posterior.
 
-**Descrição:** O projeto utiliza o Multer na versão `2.0.2`, que foi indicada pelo Dependabot como vulnerável a um ataque de negação de serviço por recursão descontrolada. Uma requisição multipart malformada pode causar estouro de pilha e deixar o servidor indisponível.
-
-### Bug 2 — Ausência de limitação de requisições na rota de upload
-
-**Tipo:** Segurança  
-**Local:** `src/app.ts`, linha 254  
-**Ferramenta utilizada:** CodeQL e inspeção do código-fonte
-
-**Descrição:** A rota `POST /api/posts` permite o envio de imagens, mas não limita a quantidade de requisições feitas por um usuário em determinado período. Como cada requisição processa um arquivo e registra uma publicação no banco de dados, vários envios em sequência podem consumir os recursos do servidor e prejudicar o funcionamento da aplicação.
-
-### Bug 3 — Foto de perfil e imagem de capa não permanecem salvas
+### Bug 2 — Foto de perfil selecionada não permanece salva
 
 **Tipo:** Lógica  
-**Local:** `client/App.tsx`, linhas 129–140; `src/app.ts`, linhas 190–200; e `src/models/User.ts`  
-**Ferramenta utilizada:** Teste funcional manual e inspeção do código-fonte
+**Local:** `client/App.tsx`, linhas 138–140; `src/app.ts`, linhas 190–200  
+**Descrição:** Ao selecionar uma foto de perfil, a imagem é exibida na tela de edição, porém não permanece salva. O frontend converte o arquivo escolhido em uma Data URL e o envia no campo `avatar`, enquanto o backend aceita nesse campo somente URLs de imagem iniciadas por `http://` ou `https://`. Dessa forma, a imagem selecionada localmente não é aceita para persistência.
 
-**Descrição:** Durante o teste da edição de perfil, foi possível selecionar uma foto e uma imagem de capa, e as duas apareceram normalmente na tela. Porém, depois de sair do perfil e voltar, as imagens desapareceram. O problema foi classificado como um bug de lógica porque a interface mostra a alteração, mas o sistema não salva os dados de forma compatível. O frontend envia as imagens nos campos `avatar` e `cover`, enquanto o backend aceita somente um avatar em formato de URL HTTP(S) e não possui um campo para armazenar a capa.
+### Bug 3 — Imagem de capa selecionada não permanece salva
 
-## 2.2 Uso de ferramenta de apoio
+**Tipo:** Lógica  
+**Local:** `client/App.tsx`, linhas 133 e 139–140; `src/app.ts`, linhas 190–200; `src/models/User.ts`  
+**Descrição:** Ao selecionar uma imagem de capa, ela é exibida na tela de edição, mas desaparece depois que o perfil é carregado novamente. O frontend envia a imagem no campo `cover`, porém o backend da atualização de perfil não recebe nem salva esse campo. Além disso, o modelo `User` não possui um atributo `cover` para armazenar a imagem.
 
-O Dependabot foi ativado no repositório para verificar as dependências do projeto. A ferramenta analisou o `package-lock.json` e gerou um alerta para a versão do Multer utilizada pelo sistema. Esse alerta foi usado para identificar o Bug 1.
+## 2.2 Uso de ferramentas de apoio
+
+O **Dependabot do GitHub** foi utilizado para verificar dependências do projeto com vulnerabilidades conhecidas. A ferramenta gerou o **alerta #14** para o pacote `multer`, identificando a vulnerabilidade **CVE-2026-3520**.
 
 ![Alerta do Dependabot para a versão vulnerável do Multer](./images/dependabot-multer-alerta.png)
 
-O alerta não foi considerado um falso positivo. A versão `2.0.2` está registrada no `package-lock.json`, e o Multer é usado diretamente na rota de criação de publicações para processar o upload de imagens. Portanto, a dependência vulnerável faz parte do funcionamento real do sistema.
+O alerta não foi considerado um falso positivo, pois o projeto utiliza a versão `2.0.2` do Multer, enquanto o próprio Dependabot informa que todas as versões anteriores à `2.1.1` são afetadas. Além disso, a biblioteca é utilizada pelo sistema no processamento de upload de imagens.
 
-O CodeQL também foi utilizado como ferramenta complementar e ajudou a identificar o Bug 2. Esse alerta também não foi considerado um falso positivo, pois a rota indicada realmente não possui um mecanismo para limitar a quantidade de requisições. O terceiro bug foi encontrado por meio de um teste funcional manual.
-
-## Situação nesta etapa
-
-Nesta etapa, os bugs foram somente identificados e classificados. Os passos para reprodução, resultados obtidos e esperados, evidências detalhadas e severidade serão registrados nas Issues durante as etapas seguintes, conforme o enunciado do trabalho.
+Os Bugs 2 e 3 foram identificados por meio de teste funcional manual e confirmados pela inspeção do código-fonte.
