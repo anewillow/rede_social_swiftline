@@ -8,7 +8,7 @@ assignees: ""
 
 ## Descrição
 
-<!-- Explique brevemente o problema encontrado. -->
+<!-- Explique o problema encontrado. -->
 
 ## Versão e plataforma
 
@@ -24,15 +24,15 @@ assignees: ""
 
 ## Resultado obtido
 
-<!-- Descreva o que realmente aconteceu. -->
+<!-- Descrever o que aconteceu. -->
 
 ## Resultado esperado
 
-<!-- Descreva o que deveria acontecer. -->
+<!-- Descrever o que deveria acontecer. -->
 
 ## Evidências
 
-<!-- Anexe o vídeo gravado antes da correção, prints, logs ou trechos de código relevantes. -->
+<!-- Anexar o vídeo gravado antes da correção, prints, logs ou trechos de código relevantes. -->
 
 ### Arquivos ou trechos de código relacionados
 
@@ -45,7 +45,7 @@ assignees: ""
 
 ## Classificação
 
-<!-- Escolha uma categoria: Sintaxe, Lógica, Runtime, Concorrência, Performance, Segurança ou Dependência vulnerável. -->
+<!-- Categoria: Sintaxe, Lógica, Runtime, Concorrência, Performance, Segurança ou Dependência vulnerável. -->
 
 **Tipo:**
 
@@ -55,6 +55,3 @@ assignees: ""
 
 **Severidade:** A definir durante a triagem (Etapa 4).
 
-## Informações técnicas adicionais - opcional
-
-<!-- Informe dependências afetadas ou um exemplo mínimo reproduzível, quando disponível. -->
