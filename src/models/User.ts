@@ -18,5 +18,5 @@ User.init({
   email: { type: DataTypes.STRING, allowNull: false, unique: true },
   password: { type: DataTypes.STRING, allowNull: false },
   bio: { type: DataTypes.TEXT, allowNull: true, defaultValue: 'Escreva aqui sua bio.' },
-  avatar: { type: DataTypes.STRING, allowNull: true, defaultValue: '' }
+  avatar: { type: DataTypes.TEXT, allowNull: true }
 }, { sequelize, modelName: 'User', timestamps: true });

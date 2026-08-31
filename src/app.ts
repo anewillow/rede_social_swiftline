@@ -192,7 +192,13 @@ app.put('/api/auth/profile', requireAuth, async (req, res) => {
   if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
   const { username, bio, avatar } = req.body as Record<string, string>;
   if (username !== undefined && !username.trim()) return res.status(400).json({ message: 'Nome de usuário obrigatório.' });
-  if (avatar && !/^https?:\/\/.+\.(png|jpe?g|gif|webp)(\?.*)?$/i.test(avatar)) return res.status(400).json({ message: 'Avatar inválido.' });
+  const avatarIsValid = !avatar
+  || /^https?:\/\/.+\.(png|jpe?g|gif|webp)(\?.*)?$/i.test(avatar)
+  || /^data:image\/(png|jpe?g|gif|webp);base64,/i.test(avatar);
+
+if (!avatarIsValid) {
+  return res.status(400).json({ message: 'Avatar inválido.' });
+}
   const previousUsername = user.username;
   if (username) user.username = username.trim(); if (typeof bio === 'string') user.bio = bio; if (typeof avatar === 'string') user.avatar = avatar;
   await user.save();
