@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 app.use('/uploads', express.static(uploadsPath));
 app.use(express.static(path.join(process.cwd(), 'client-dist')));
 
-const publicUser = (user: User) => ({ id: user.id, username: user.username, bio: user.bio, avatar: user.avatar, createdAt: user.createdAt });
+const publicUser = (user: User) => ({ id: user.id, username: user.username, bio: user.bio, avatar: user.avatar, cover: user.cover, createdAt: user.createdAt });
 const privateUser = (user: User) => ({ ...publicUser(user), email: user.email });
 
 type GroupedCount = { postId: number | string; count: number | string };
@@ -190,11 +190,11 @@ app.get('/api/auth/me', requireAuth, async (req, res) => {
 app.put('/api/auth/profile', requireAuth, async (req, res) => {
   const user = await User.findByPk(req.userId);
   if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
-  const { username, bio, avatar } = req.body as Record<string, string>;
+  const { username, bio, avatar, cover } = req.body as Record<string, string>;
   if (username !== undefined && !username.trim()) return res.status(400).json({ message: 'Nome de usuário obrigatório.' });
   if (avatar && !/^https?:\/\/.+\.(png|jpe?g|gif|webp)(\?.*)?$/i.test(avatar)) return res.status(400).json({ message: 'Avatar inválido.' });
   const previousUsername = user.username;
-  if (username) user.username = username.trim(); if (typeof bio === 'string') user.bio = bio; if (typeof avatar === 'string') user.avatar = avatar;
+  if (username) user.username = username.trim(); if (typeof bio === 'string') user.bio = bio; if (typeof avatar === 'string') user.avatar = avatar; if (typeof cover === 'string') user.cover = cover;;
   await user.save();
   if (user.username !== previousUsername) await Post.update({ author: user.username, avatar: user.avatar }, { where: { userId: user.id } });
   return res.json({ message: 'Perfil atualizado!', user: privateUser(user) });
