@@ -14,12 +14,11 @@
 | Bug 2 — Foto de perfil | [#2](https://github.com/anewillow/rede_social_swiftline/issues/2) | [fix/issue-2-salvar-foto-perfil](https://github.com/anewillow/rede_social_swiftline/tree/fix/issue-2-salvar-foto-perfil) | [1cadcf4](https://github.com/anewillow/rede_social_swiftline/commit/1cadcf43289f768ece0a8872abf933856de3e134) | [#5](https://github.com/anewillow/rede_social_swiftline/pull/5) |
 | Bug 3 — Imagem de capa | [#3](https://github.com/anewillow/rede_social_swiftline/issues/3) | [fix/issue-3-salvar-imagem-capa](https://github.com/anewillow/rede_social_swiftline/tree/fix/issue-3-salvar-imagem-capa) | [05a6eed](https://github.com/anewillow/rede_social_swiftline/commit/05a6eedfb66336f8f08f4af504c94c621d088c22) | — |
 
-## Executar o sistema
+## Relatórios e evidências
 
-```bash
-cd sistema
-npm install
-npm run dev
-```
-
-[Configuração do sistema](./trabalho1_manutencao_corretiva/docs/apresentacao-sistema.md)
+- [Apresentação do sistema](./trabalho1_manutencao_corretiva/docs/apresentacao-sistema.md)
+- [Identificação e classificação dos bugs](./trabalho1_manutencao_corretiva/docs/bugs-e-classificacao.md)
+- [Relatório final](./trabalho1_manutencao_corretiva/docs/relatorio-final.md)
+- [Apresentação em PowerPoint](./trabalho1_manutencao_corretiva/docs/apresentacao-manutencao-corretiva-swiftline.pptx)
+- [Imagens e evidências](./trabalho1_manutencao_corretiva/docs/images/)
+- [Vídeo de evidências](./trabalho1_manutencao_corretiva/ev1_imagens_cortado.mp4)
