@@ -16,7 +16,3 @@
 - [Apresentação em PowerPoint](./docs/apresentacao-manutencao-corretiva-swiftline.pptx)
 - [Imagens e evidências](./docs/images/)
 - [Vídeo de evidências](./ev1_imagens_cortado.mp4)
-
-Os caminhos de código citados nos relatórios, como `src/`, `client/` e `tests/`, são relativos à pasta [sistema](../sistema/). Links para commits e branches antigos preservam os caminhos históricos.
-
-As pastas locais `.codex-build` e `.codex-video-check` guardam arquivos auxiliares de produção dos materiais.
