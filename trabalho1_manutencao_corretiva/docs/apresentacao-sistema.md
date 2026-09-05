@@ -96,7 +96,7 @@ Abra o terminal, clone o repositório e entre na pasta criada:
 
 ```bash
 git clone https://github.com/anewillow/rede_social_swiftline.git
-cd rede_social_swiftline
+cd rede_social_swiftline/sistema
 ```
 
 ### 2. Instale as dependências
@@ -119,7 +119,7 @@ CREATE DATABASE swiftline
 
 ### 4. Configure a conexão
 
-Na raiz do projeto, crie um arquivo chamado `.env` e informe os dados do seu MySQL:
+Dentro da pasta `sistema`, crie um arquivo chamado `.env` e informe os dados do seu MySQL:
 
 ```env
 DB_HOST=localhost

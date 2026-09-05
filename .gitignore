@@ -5,7 +5,7 @@ node_modules/
 .env
 .env.*
 !.env.example
-config/config.json
+sistema/config/config.json
 
 # Arquivos gerados pela compilação
 client-dist/
@@ -13,28 +13,32 @@ dist/
 *.tsbuildinfo
 
 # Materiais locais que não fazem parte desta entrega
-assets/*
-!assets/swiftline-arquitetura-sistema-v6.png
+sistema/assets/*
+!sistema/assets/swiftline-arquitetura-sistema-v6.png
 config/
-playwright/tests/nt*.spec.js
-playwright/tests/e2e.spec.js
-playwright/tests/login-debug.spec.js
-playwright/tests/video-test.spec.js
-scripts/*
-!scripts/run-server-and-tests.ps1
+sistema/playwright/tests/nt*.spec.js
+sistema/playwright/tests/e2e.spec.js
+sistema/playwright/tests/login-debug.spec.js
+sistema/playwright/tests/video-test.spec.js
+sistema/scripts/*
+!sistema/scripts/run-server-and-tests.ps1
+!sistema/scripts/apply-cover-local.mjs
 
 # Resultados e evidências brutas de testes
 test-results/
 playwright-report/
-playwright/artifacts/
+sistema/playwright/artifacts/
 coverage/
 
 # Imagens enviadas durante o uso da aplicação
 uploads/
-public/uploads/
+sistema/public/uploads/
 
 # Arquivos temporários e backups locais
 .codex-tmp/
+.codex-build/
+.codex-video-check/
+*.inspect.ndjson
 tmp/
 bak/
 teste3/

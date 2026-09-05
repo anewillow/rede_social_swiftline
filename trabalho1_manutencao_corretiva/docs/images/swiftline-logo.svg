@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Swiftline</title>
+  <desc id="desc">Símbolo vinho com estrela branca acompanhado do nome swiftline.</desc>
+  <defs>
+    <linearGradient id="swiftlineGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#bd6379"/>
+      <stop offset="1" stop-color="#91344c"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(52 55) rotate(-4 125 125)">
+    <rect width="250" height="250" rx="70" fill="url(#swiftlineGradient)"/>
+    <path d="M125 73 C131 104 146 119 177 125 C146 131 131 146 125 177 C119 146 104 131 73 125 C104 119 119 104 125 73 Z" fill="#ffffff"/>
+  </g>
+  <text x="355" y="222" fill="#9d3852" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-size="150" font-weight="600" letter-spacing="-3">swiftline</text>
+</svg>
