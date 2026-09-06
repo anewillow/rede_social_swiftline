@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useState } from 'react';
 import { ArrowLeft, Bookmark, Eye, MessageSquare, MoreHorizontal, Repeat2, Send, Share, ThumbsUp } from 'lucide-react';
 
-type User = { id: number; username: string; bio?: string; avatar?: string; cover?: string; createdAt?: string };
+type User = { id: number; username: string; bio?: string; avatar?: string | null; cover?: string | null; createdAt?: string };
 type Post = { id: number; content: string; image?: string; likes?: number; liked?: boolean; commentCount?: number; reposts?: number; reposted?: boolean; views?: number; saved?: boolean; shares?: number; createdAt: string };
 type Comment = { id: number; content: string; user?: Pick<User, 'username' | 'avatar'> };
 

@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": "."
+  },
+  "include": [
+    "src/**/*.ts",
+    "tests/profile-avatar.test.ts",
+    "tests/profile-cover.test.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "client"
+  ]
+}

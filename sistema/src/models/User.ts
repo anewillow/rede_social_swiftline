@@ -8,6 +8,7 @@ export class User extends Model {
   declare password: string;
   declare bio: string | null;
   declare avatar: string | null;
+  declare cover: string | null;
   declare createdAt: Date;
   declare updatedAt: Date;
 }
@@ -18,5 +19,6 @@ User.init({
   email: { type: DataTypes.STRING, allowNull: false, unique: true },
   password: { type: DataTypes.STRING, allowNull: false },
   bio: { type: DataTypes.TEXT, allowNull: true, defaultValue: 'Escreva aqui sua bio.' },
-  avatar: { type: DataTypes.STRING, allowNull: true, defaultValue: '' }
+  avatar: { type: DataTypes.STRING, allowNull: true, defaultValue: '' },
+  cover: { type: DataTypes.STRING, allowNull: true, defaultValue: '' }
 }, { sequelize, modelName: 'User', timestamps: true });

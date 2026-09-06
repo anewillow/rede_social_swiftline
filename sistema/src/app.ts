@@ -1,4 +1,4 @@
-import express, { type Request, type Response } from 'express';
+import express, { type NextFunction, type Request, type Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
@@ -7,6 +7,8 @@ import path from 'node:path';
 import { Op } from 'sequelize';
 import { Comment, CommentLike, Follow, Like, Message, Notification, Post, PostView, Repost, SavedPost, User } from './models/index.js';
 import { optionalAuth, requireAuth, secret } from './middleware/auth.js';
+import sequelize from './models/db.js';
+import { prepareAvatar, prepareCover, removeStoredProfileImage, savePreparedProfileImage } from './avatar.js';
 
 const app = express();
 const uploadsPath = path.join(process.cwd(), 'public/uploads');
@@ -14,12 +16,22 @@ mkdirSync(uploadsPath, { recursive: true });
 const upload = multer({ storage: multer.diskStorage({ destination: uploadsPath, filename: (_request, file, callback) => callback(null, `${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '-')}`) }) });
 const clientEntry = path.join(process.cwd(), 'client-dist/index.html');
 
+app.use('/api/auth/profile', express.json({ limit: '9mb' }));
 app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
+app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
+  if ((error as { type?: string }).type === 'entity.too.large') {
+    const message = req.originalUrl.startsWith('/api/auth/profile')
+      ? 'As imagens selecionadas ultrapassam o limite permitido.'
+      : 'A solicitação ultrapassa o limite permitido.';
+    return res.status(413).json({ message });
+  }
+  return next(error);
+});
 app.use('/uploads', express.static(uploadsPath));
 app.use(express.static(path.join(process.cwd(), 'client-dist')));
 
-const publicUser = (user: User) => ({ id: user.id, username: user.username, bio: user.bio, avatar: user.avatar, createdAt: user.createdAt });
+const publicUser = (user: User) => ({ id: user.id, username: user.username, bio: user.bio, avatar: user.avatar, cover: user.cover, createdAt: user.createdAt });
 const privateUser = (user: User) => ({ ...publicUser(user), email: user.email });
 
 type GroupedCount = { postId: number | string; count: number | string };
@@ -190,17 +202,64 @@ app.get('/api/auth/me', requireAuth, async (req, res) => {
 app.put('/api/auth/profile', requireAuth, async (req, res) => {
   const user = await User.findByPk(req.userId);
   if (!user) return res.status(404).json({ message: 'Usuário não encontrado.' });
-  const { username, bio, avatar } = req.body as Record<string, string>;
+  const { username, bio, avatar, cover } = req.body as Record<string, string>;
   if (username !== undefined && !username.trim()) return res.status(400).json({ message: 'Nome de usuário obrigatório.' });
-  if (avatar && !/^https?:\/\/.+\.(png|jpe?g|gif|webp)(\?.*)?$/i.test(avatar)) return res.status(400).json({ message: 'Avatar inválido.' });
+
   const previousUsername = user.username;
-  if (username) user.username = username.trim(); if (typeof bio === 'string') user.bio = bio; if (typeof avatar === 'string') user.avatar = avatar;
-  await user.save();
-  if (user.username !== previousUsername) await Post.update({ author: user.username, avatar: user.avatar }, { where: { userId: user.id } });
+  const previousAvatar = user.avatar;
+  const previousCover = user.cover;
+  let nextAvatar = previousAvatar;
+  let nextCover = previousCover;
+  const preparedAvatar = typeof avatar === 'string' && avatar ? prepareAvatar(avatar, user.id) : null;
+  const preparedCover = typeof cover === 'string' && cover ? prepareCover(cover, user.id) : null;
+
+  if (typeof avatar === 'string' && avatar && !preparedAvatar) {
+    return res.status(400).json({ message: 'Avatar inválido ou maior que 3 MB.' });
+  }
+  if (typeof cover === 'string' && cover && !preparedCover) {
+    return res.status(400).json({ message: 'Imagem de capa inválida ou maior que 3 MB.' });
+  }
+
+  try {
+    if (typeof avatar === 'string') nextAvatar = preparedAvatar ? await savePreparedProfileImage(preparedAvatar, uploadsPath) : '';
+    if (typeof cover === 'string') nextCover = preparedCover ? await savePreparedProfileImage(preparedCover, uploadsPath) : '';
+
+    await sequelize.transaction(async (transaction) => {
+      if (username) user.username = username.trim();
+      if (typeof bio === 'string') user.bio = bio;
+      user.avatar = nextAvatar;
+      user.cover = nextCover;
+      await user.save({ transaction });
+      if (user.username !== previousUsername || user.avatar !== previousAvatar) {
+        await Post.update({ author: user.username, avatar: user.avatar }, { where: { userId: user.id }, transaction });
+      }
+    });
+  } catch {
+    await Promise.allSettled([
+      preparedAvatar?.bytes ? removeStoredProfileImage(preparedAvatar.url, uploadsPath, user.id, 'avatar') : Promise.resolve(),
+      preparedCover?.bytes ? removeStoredProfileImage(preparedCover.url, uploadsPath, user.id, 'cover') : Promise.resolve()
+    ]);
+    return res.status(500).json({ message: 'Não foi possível atualizar o perfil.' });
+  }
+
+  await Promise.allSettled([
+    nextAvatar !== previousAvatar ? removeStoredProfileImage(previousAvatar, uploadsPath, user.id, 'avatar') : Promise.resolve(),
+    nextCover !== previousCover ? removeStoredProfileImage(previousCover, uploadsPath, user.id, 'cover') : Promise.resolve()
+  ]);
   return res.json({ message: 'Perfil atualizado!', user: privateUser(user) });
 });
 
-app.delete('/api/auth/delete', requireAuth, async (req, res) => { const user = await User.findByPk(req.userId); if (!user) return res.status(404).json({ message: 'Usuário não encontrado' }); await user.destroy(); return res.json({ message: 'Conta excluída com sucesso.' }); });
+app.delete('/api/auth/delete', requireAuth, async (req, res) => {
+  const user = await User.findByPk(req.userId);
+  if (!user) return res.status(404).json({ message: 'Usuário não encontrado' });
+  const { avatar, cover } = user;
+  await user.destroy();
+  await Promise.allSettled([
+    removeStoredProfileImage(avatar, uploadsPath, user.id, 'avatar'),
+    removeStoredProfileImage(cover, uploadsPath, user.id, 'cover')
+  ]);
+  return res.json({ message: 'Conta excluída com sucesso.' });
+});
 
 app.get('/api/posts', optionalAuth, async (req, res) => {
   const username = typeof req.query.username === 'string' ? req.query.username : undefined;

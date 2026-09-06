@@ -4,10 +4,14 @@
   "description": "Protótipo de rede social baseada em Node.js",
   "main": "src/server.ts",
   "scripts": {
-    "start": "tsx src/server.ts",
+    "prepare:database": "tsc -p tsconfig.server.json && node scripts/apply-cover-local.mjs",
+    "prestart": "npm run prepare:database",
+    "start": "node dist/src/server.js",
+    "predev": "npm run prepare:database",
     "dev": "tsx watch src/server.ts",
     "build": "tsc --noEmit && vite build",
     "test:security": "node --test tests/multer-version.test.mjs",
+    "test:profile": "tsc -p tsconfig.server.json && node --test dist/tests/profile-avatar.test.js dist/tests/profile-cover.test.js",
     "test:e2e": "npx playwright test"
   },
   "dependencies": {
