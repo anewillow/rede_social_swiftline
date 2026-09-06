@@ -319,25 +319,51 @@ app.post('/api/posts', requireAuth, upload.single('image'), async (req, res) => 
 });
 
 app.delete('/api/posts/:id', requireAuth, async (req, res) => { const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); if (post.userId !== req.userId) return res.status(403).json({ error: 'Você não tem permissão para excluir este post' }); await post.destroy(); return res.json({ message: 'Post excluído com sucesso' }); });
+
+
 app.post('/api/posts/:id/like', requireAuth, async (req, res) => { const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); const existing = await Like.findOne({ where: { userId: req.userId, postId: post.id } }); const liked = !existing; if (existing) await existing.destroy(); else { await Like.create({ userId: req.userId!, postId: post.id }); if (post.userId !== req.userId) { const actor = await User.findByPk(req.userId); await Notification.create({ userId: post.userId, actorId: req.userId!, type: 'like', message: `${actor?.username ?? 'Alguém'} curtiu sua publicação.` }); } } post.likes = await Like.count({ where: { postId: post.id } }); await post.save(); return res.json({ likes: post.likes, liked }); });
+
+
 app.post('/api/posts/:id/repost', requireAuth, async (req, res) => { const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); const existing = await Repost.findOne({ where: { userId: req.userId, postId: post.id } }); const reposted = !existing; if (existing) await existing.destroy(); else await Repost.create({ userId: req.userId!, postId: post.id }); return res.json({ reposted, reposts: await Repost.count({ where: { postId: post.id } }) }); });
+
+
 app.post('/api/posts/:id/save', requireAuth, async (req, res) => { const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); const existing = await SavedPost.findOne({ where: { userId: req.userId, postId: post.id } }); const saved = !existing; if (existing) await existing.destroy(); else await SavedPost.create({ userId: req.userId!, postId: post.id }); return res.json({ saved }); });
+
+
 app.post('/api/posts/views', requireAuth, async (req, res) => { const postIds = [...new Set((Array.isArray(req.body.postIds) ? req.body.postIds : []).map(Number).filter((id: number) => Number.isInteger(id) && id > 0))] as number[]; const posts = postIds.length ? await Post.findAll({ where: { id: postIds }, attributes: ['id'] }) : []; if (posts.length) await PostView.bulkCreate(posts.map((post) => ({ userId: req.userId!, postId: post.id })), { ignoreDuplicates: true }); const counts = posts.length ? await PostView.count({ where: { postId: posts.map((post) => post.id) }, group: 'postId' }) : []; return res.json({ views: Object.fromEntries((counts as GroupedCount[]).map((row) => [Number(row.postId), Number(row.count)])) }); });
+
+
 app.post('/api/posts/:id/share', requireAuth, async (req, res) => { const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); post.shares = Number(post.shares || 0) + 1; await post.save(); return res.json({ shares: post.shares }); });
 
 app.get('/api/posts/:id/comments', optionalAuth, async (req, res) => { const comments = await Comment.findAll({ where: { postId: req.params.id }, include: [{ model: User, as: 'user', attributes: ['id', 'username', 'avatar'] }], order: [['createdAt', 'ASC']] }); return res.json(comments); });
+
+
 app.post('/api/posts/:id/comments', requireAuth, async (req, res) => { const content = String(req.body.content ?? '').trim(); if (!content) return res.status(400).json({ error: 'Comentário obrigatório' }); const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); const comment = await Comment.create({ postId: post.id, userId: req.userId!, content }); if (post.userId !== req.userId) { const actor = await User.findByPk(req.userId); await Notification.create({ userId: post.userId, actorId: req.userId!, type: 'comment', message: `${actor?.username ?? 'Alguém'} respondeu à sua publicação.` }); } await comment.reload({ include: [{ model: User, as: 'user', attributes: ['id', 'username', 'avatar'] }] }); return res.status(201).json(comment); });
+
+
 app.put('/api/posts/comments/:commentId', requireAuth, async (req, res) => { const comment = await Comment.findByPk(Number(req.params.commentId)); const content = String(req.body.content ?? '').trim(); if (!comment) return res.status(404).json({ error: 'Comentário não encontrado' }); if (comment.userId !== req.userId) return res.status(403).json({ error: 'Você não tem permissão para editar este comentário' }); if (!content) return res.status(400).json({ error: 'O comentário não pode ficar vazio' }); comment.content = content; await comment.save(); return res.json(comment); });
+
+
 app.delete('/api/posts/comments/:commentId', requireAuth, async (req, res) => { const comment = await Comment.findByPk(Number(req.params.commentId)); if (!comment) return res.status(404).json({ error: 'Comentário não encontrado' }); if (comment.userId !== req.userId) return res.status(403).json({ error: 'Você não tem permissão para excluir este comentário' }); await comment.destroy(); return res.json({ message: 'Comentário excluído com sucesso' }); });
+
+
 app.post('/api/posts/comments/:commentId/like', requireAuth, async (req, res) => { const commentId = Number(req.params.commentId); const existing = await CommentLike.findOne({ where: { userId: req.userId, commentId } }); const liked = !existing; if (existing) await existing.destroy(); else await CommentLike.create({ userId: req.userId!, commentId }); return res.json({ likes: await CommentLike.count({ where: { commentId } }), liked }); });
 
 app.get('/api/users/search', optionalAuth, async (req, res) => { const query = String(req.query.q ?? ''); const users = await User.findAll({ where: { ...(query ? { username: { [Op.like]: `%${query}%` } } : {}), ...(req.userId ? { id: { [Op.ne]: req.userId } } : {}) }, attributes: ['id', 'username', 'avatar', 'bio', 'createdAt'] }); return res.json(users); });
+
+
 app.get('/api/users/username/:username', async (req, res) => { const user = await User.findOne({ where: { username: req.params.username } }); if (!user) return res.status(404).json({ error: 'Usuário não encontrado' }); return res.json(publicUser(user)); });
 app.get('/api/users/id/:id', async (req, res) => { const user = await User.findByPk(Number(req.params.id)); if (!user) return res.status(404).json({ error: 'Usuário não encontrado' }); return res.json(publicUser(user)); });
+
+
 app.get('/api/users/:username/followers', async (req, res) => { const user = await User.findOne({ where: { username: req.params.username } }); if (!user) return res.status(404).json({ error: 'Usuário não encontrado' }); const relations = await Follow.findAll({ where: { followingId: user.id } }); const users = await User.findAll({ where: { id: relations.map((relation) => relation.followerId) }, attributes: ['id', 'username', 'avatar', 'bio'] }); return res.json(users); });
+
+
 app.get('/api/users/:username/following', async (req, res) => { const user = await User.findOne({ where: { username: req.params.username } }); if (!user) return res.status(404).json({ error: 'Usuário não encontrado' }); const relations = await Follow.findAll({ where: { followerId: user.id } }); const users = await User.findAll({ where: { id: relations.map((relation) => relation.followingId) }, attributes: ['id', 'username', 'avatar', 'bio'] }); return res.json(users); });
 
 app.post('/api/follow/follow/:username', requireAuth, async (req, res) => { const target = await User.findOne({ where: { username: req.params.username } }); if (!target || target.id === req.userId) return res.status(400).json({ error: 'Usuário inválido' }); const [, created] = await Follow.findOrCreate({ where: { followerId: req.userId!, followingId: target.id } }); if (created) { const actor = await User.findByPk(req.userId); await Notification.create({ userId: target.id, actorId: req.userId!, type: 'follow', message: `${actor?.username ?? 'Alguém'} começou a seguir você.` }); } return res.json({ success: true, followersCount: await Follow.count({ where: { followingId: target.id } }) }); });
+
+
 app.post('/api/follow/unfollow/:username', requireAuth, async (req, res) => { const target = await User.findOne({ where: { username: req.params.username } }); if (!target) return res.status(404).json({ error: 'Usuário não encontrado' }); await Follow.destroy({ where: { followerId: req.userId!, followingId: target.id } }); return res.json({ success: true, followersCount: await Follow.count({ where: { followingId: target.id } }) }); });
 app.get('/api/follow/is-following/:username', requireAuth, async (req, res) => { const target = await User.findOne({ where: { username: req.params.username } }); return res.json({ following: !!target && !!await Follow.findOne({ where: { followerId: req.userId!, followingId: target.id } }) }); });
 
@@ -345,7 +371,11 @@ app.get('/api/notifications', requireAuth, async (req, res) => { const notificat
 app.put('/api/notifications/read', requireAuth, async (req, res) => { await Notification.update({ isRead: true }, { where: { userId: req.userId } }); return res.json({ success: true }); });
 
 app.get('/api/messages/people', requireAuth, async (req, res) => { const people = await User.findAll({ where: { id: { [Op.ne]: req.userId } }, attributes: ['id', 'username', 'avatar', 'bio'], limit: 30 }); return res.json(people); });
+
+
 app.get('/api/messages/:userId', requireAuth, async (req, res) => { const otherId = Number(req.params.userId); const messages = await Message.findAll({ where: { [Op.or]: [{ senderId: req.userId, receiverId: otherId }, { senderId: otherId, receiverId: req.userId }] }, order: [['createdAt', 'ASC']], include: [{ model: User, as: 'sender', attributes: ['username', 'avatar'] }] }); return res.json(messages); });
+
+
 app.post('/api/messages/:userId', requireAuth, async (req, res) => { const content = String(req.body.content ?? '').trim(); const receiverId = Number(req.params.userId); if (!content) return res.status(400).json({ error: 'Mensagem obrigatória' }); if (receiverId === req.userId || !await User.findByPk(receiverId)) return res.status(400).json({ error: 'Destinatário inválido' }); const message = await Message.create({ senderId: req.userId!, receiverId, content }); await message.reload({ include: [{ model: User, as: 'sender', attributes: ['username', 'avatar'] }] }); return res.status(201).json(message); });
 
 app.get('*', (_req, res) => res.sendFile(clientEntry));
