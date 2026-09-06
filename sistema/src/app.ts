@@ -340,6 +340,7 @@ app.get('/api/posts/:id/comments', optionalAuth, async (req, res) => { const com
 
 app.post('/api/posts/:id/comments', requireAuth, async (req, res) => { const content = String(req.body.content ?? '').trim(); if (!content) return res.status(400).json({ error: 'Comentário obrigatório' }); const post = await Post.findByPk(Number(req.params.id)); if (!post) return res.status(404).json({ error: 'Post não encontrado' }); const comment = await Comment.create({ postId: post.id, userId: req.userId!, content }); if (post.userId !== req.userId) { const actor = await User.findByPk(req.userId); await Notification.create({ userId: post.userId, actorId: req.userId!, type: 'comment', message: `${actor?.username ?? 'Alguém'} respondeu à sua publicação.` }); } await comment.reload({ include: [{ model: User, as: 'user', attributes: ['id', 'username', 'avatar'] }] }); return res.status(201).json(comment); });
 
+// Neste trecho, o sistema possui três verificações de permissão separadas.
 
 app.put('/api/posts/comments/:commentId', requireAuth, async (req, res) => { const comment = await Comment.findByPk(Number(req.params.commentId)); const content = String(req.body.content ?? '').trim(); if (!comment) return res.status(404).json({ error: 'Comentário não encontrado' }); if (comment.userId !== req.userId) return res.status(403).json({ error: 'Você não tem permissão para editar este comentário' }); if (!content) return res.status(400).json({ error: 'O comentário não pode ficar vazio' }); comment.content = content; await comment.save(); return res.json(comment); });
 
