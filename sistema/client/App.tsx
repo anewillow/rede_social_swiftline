@@ -4,7 +4,7 @@ import { SwiftProfile } from './SwiftProfile';
 
 type User = { id: number; username: string; email?: string; bio?: string; avatar?: string | null; cover?: string | null; createdAt?: string };
 type Post = { id: number; userId: number; author: string; content: string; image?: string; likes?: number; liked?: boolean; commentCount?: number; reposts?: number; reposted?: boolean; views?: number; saved?: boolean; shares?: number; createdAt: string; avatar?: string };
-type Comment = { id: number; userId: number; content: string; createdAt: string; user?: Pick<User, 'username' | 'avatar'> };
+type Comment = { id: number; userId: number; content: string; createdAt: string; user?: Pick<User, 'username' | 'avatar'>; permissions: { canEdit: boolean; canDelete: boolean } };
 type SearchResults = { users: User[]; posts: Post[] };
 type NewsItem = { id: string; title: string; url: string; description: string; publishedAt: string; source: string; image: string | null };
 type Page = 'feed' | 'network' | 'messages' | 'notifications' | 'saved' | 'profile' | 'userProfile';
@@ -117,7 +117,101 @@ function SavedPosts({ user, openProfile }: { user: User; openProfile: (username:
   return <section className="saved-page"><header className="saved-header"><p className="eyebrow">SALVOS</p><h1>Publicações salvas</h1></header>{!loading && !posts.length ? <Empty title="Nada salvo ainda." description="Use o ícone de marcador em uma publicação para encontrá-la aqui depois." /> : <div className="feed-list">{posts.map((post) => <article id={`post-${post.id}`} className="post tweet" key={post.id}><header><button className="person-link avatar-link" onClick={() => openProfile(post.author, post.userId)}><Avatar person={post}/></button><div><button className="person-link author-link" onClick={() => openProfile(post.author, post.userId)}>{post.author}</button><p>@{post.author.replace(/\s/g, '').toLowerCase()} · {new Date(post.createdAt).toLocaleDateString('pt-BR')}</p></div></header><p className="post-content">{post.content}</p>{post.image && <img className="post-image" src={post.image} alt="Imagem da publicação"/>}<PostActions post={post} currentUserId={user.id} onUpdate={updatePost}/></article>)}</div>}</section>;
 }
 
-function Comments({ postId, currentUserId, onCountChange }: { postId: number; currentUserId: number; onCountChange: (count: number) => void }) { const [items, setItems] = useState<Comment[]>([]); const [content, setContent] = useState(''); const [editing, setEditing] = useState<number | null>(null); const [editContent, setEditContent] = useState(''); const load = async () => { const response = await fetch(`/api/posts/${postId}/comments`, { headers: headers() }); const comments = await response.json(); setItems(comments); onCountChange(comments.length); }; useEffect(() => { void load(); }, [postId]); const submit = async (event: FormEvent) => { event.preventDefault(); if (!content.trim()) return; const response = await fetch(`/api/posts/${postId}/comments`, { method: 'POST', headers: { ...headers(), 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) }); if (response.ok) { setContent(''); void load(); } }; const saveEdit = async (item: Comment) => { const response = await fetch(`/api/posts/comments/${item.id}`, { method: 'PUT', headers: { ...headers(), 'Content-Type': 'application/json' }, body: JSON.stringify({ content: editContent }) }); if (response.ok) { setEditing(null); void load(); } }; const remove = async (item: Comment) => { if (!confirm('Excluir este comentário?')) return; const response = await fetch(`/api/posts/comments/${item.id}`, { method: 'DELETE', headers: headers() }); if (response.ok) { const comments = items.filter((comment) => comment.id !== item.id); setItems(comments); onCountChange(comments.length); } }; return <section className="comments"><div className="comment-list">{items.map((item) => <div className="comment" key={item.id}><Avatar person={item.user}/><div className="comment-body">{editing === item.id ? <div className="comment-edit"><input value={editContent} onChange={(event) => setEditContent(event.target.value)} /><button onClick={() => void saveEdit(item)}>Salvar</button><button onClick={() => setEditing(null)}>Cancelar</button></div> : <p><strong>{item.user?.username}</strong>{item.content}</p>}{item.userId === currentUserId && editing !== item.id && <div className="comment-actions"><button onClick={() => { setEditing(item.id); setEditContent(item.content); }}>Editar</button><button className="delete-comment-btn" onClick={() => void remove(item)}>Excluir</button></div>}</div></div>)}</div><form onSubmit={submit}><input value={content} onChange={(event) => setContent(event.target.value)} placeholder="Escreva um comentário" /><button aria-label="Enviar comentário"><Send size={16}/></button></form></section>; }
+function Comments({ postId, onCountChange }: { postId: number; currentUserId: number; onCountChange: (count: number) => void }) {
+  const [items, setItems] = useState<Comment[]>([]);
+  const [content, setContent] = useState('');
+  const [editing, setEditing] = useState<number | null>(null);
+  const [editContent, setEditContent] = useState('');
+
+  const load = async () => {
+    const response = await fetch(`/api/posts/${postId}/comments`, { headers: headers() });
+    const comments = await response.json();
+    setItems(comments);
+    onCountChange(comments.length);
+  };
+
+  useEffect(() => { void load(); }, [postId]);
+
+  const submit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!content.trim()) return;
+    const response = await fetch(`/api/posts/${postId}/comments`, {
+      method: 'POST',
+      headers: { ...headers(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+    if (response.ok) {
+      setContent('');
+      void load();
+    }
+  };
+
+  const saveEdit = async (item: Comment) => {
+    const response = await fetch(`/api/posts/comments/${item.id}`, {
+      method: 'PUT',
+      headers: { ...headers(), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: editContent }),
+    });
+    if (response.ok) {
+      setEditing(null);
+      void load();
+    }
+  };
+
+  const remove = async (item: Comment) => {
+    if (!confirm('Excluir este comentário?')) return;
+    const response = await fetch(`/api/posts/comments/${item.id}`, {
+      method: 'DELETE',
+      headers: headers(),
+    });
+    if (response.ok) {
+      const comments = items.filter((comment) => comment.id !== item.id);
+      setItems(comments);
+      onCountChange(comments.length);
+    }
+  };
+
+  return (
+    <section className="comments">
+      <div className="comment-list">
+        {items.map((item) => (
+          <div className="comment" key={item.id}>
+            <Avatar person={item.user}/>
+            <div className="comment-body">
+              {editing === item.id ? (
+                <div className="comment-edit">
+                  <input value={editContent} onChange={(event) => setEditContent(event.target.value)} />
+                  <button onClick={() => void saveEdit(item)}>Salvar</button>
+                  <button onClick={() => setEditing(null)}>Cancelar</button>
+                </div>
+              ) : (
+                <p><strong>{item.user?.username}</strong>{item.content}</p>
+              )}
+              {editing !== item.id && (item.permissions.canEdit || item.permissions.canDelete) && (
+                <div className="comment-actions">
+                  {item.permissions.canEdit && (
+                    <button onClick={() => { setEditing(item.id); setEditContent(item.content); }}>
+                      Editar
+                    </button>
+                  )}
+                  {item.permissions.canDelete && (
+                    <button className="delete-comment-btn" onClick={() => void remove(item)}>
+                      Excluir
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <form onSubmit={submit}>
+        <input value={content} onChange={(event) => setContent(event.target.value)} placeholder="Escreva um comentário" />
+        <button aria-label="Enviar comentário"><Send size={16}/></button>
+      </form>
+    </section>
+  );
+}
 
 function Network({ openProfile }: { openProfile: (username: string) => void }) { const [query, setQuery] = useState(sessionStorage.getItem('networkQuery') || ''); const [people, setPeople] = useState<User[]>([]); const [following, setFollowing] = useState<number[]>([]); const search = async (term = query) => { const response = await fetch(`/api/users/search?q=${encodeURIComponent(term)}`, { headers: headers() }); setPeople(await response.json()); }; useEffect(() => { void search(); }, []); const toggle = async (person: User) => { const isFollowing = following.includes(person.id); const response = await fetch(`/api/follow/${isFollowing ? 'unfollow' : 'follow'}/${encodeURIComponent(person.username)}`, { method: 'POST', headers: headers() }); if (response.ok) setFollowing((ids) => isFollowing ? ids.filter((id) => id !== person.id) : [...ids, person.id]); }; return <section className="page-section"><p className="eyebrow">ENCONTRAR PESSOAS</p><h1>Quem você quer acompanhar?</h1><form className="directory-search" onSubmit={(event) => { event.preventDefault(); void search(); }}><Search size={18}/><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Busque pelo nome" /><button>Buscar</button></form><div className="people-grid">{people.map((person) => <article className="person-card" key={person.id}><button className="person-link" onClick={() => openProfile(person.username)}><Avatar person={person} size="large"/></button><button className="person-link author-link" onClick={() => openProfile(person.username)}>{person.username}</button><p>{person.bio || 'Compartilhando momentos na Swiftline.'}</p><button className={following.includes(person.id) ? 'soft-button following' : 'soft-button'} onClick={() => void toggle(person)}><UserPlus size={16}/>{following.includes(person.id) ? 'Seguindo' : 'Seguir'}</button></article>)}</div>{people.length === 0 && <Empty title="Encontre alguém para seguir." description="Busque por um nome e comece a montar a sua timeline." />}</section>; }
 
