@@ -12,6 +12,7 @@
     "build": "tsc --noEmit && vite build",
     "test:security": "node --test tests/multer-version.test.mjs",
     "test:profile": "tsc -p tsconfig.server.json && node --test dist/tests/profile-avatar.test.js dist/tests/profile-cover.test.js",
+    "test:permissions": "tsc -p tsconfig.server.json && node --test dist/tests/permissions.test.js",
     "test:e2e": "npx playwright test"
   },
   "dependencies": {
