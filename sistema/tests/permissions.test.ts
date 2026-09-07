@@ -17,7 +17,7 @@ test('o autor mantém as permissões atuais', () => {
   });
 });
 
-test('outro usuário continua sem permissão sobre conteúdo alheio', () => {
+test('outro usuário continua sem permissão sobre conteúdo de outro usuário', () => {
   assert.equal(canDeletePost(8, 7), false);
   assert.equal(canEditComment(8, 7), false);
   assert.equal(canDeleteComment(8, 7), false);
