@@ -9,7 +9,8 @@
     "src/**/*.ts",
     "tests/profile-avatar.test.ts",
     "tests/profile-cover.test.ts",
-    "tests/permissions.test.ts"
+    "tests/permissions.test.ts",
+    "tests/rate-limit.test.ts"
   ],
   "exclude": [
     "node_modules",

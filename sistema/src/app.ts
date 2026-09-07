@@ -1,4 +1,5 @@
 import express, { type NextFunction, type Request, type Response } from 'express';
+import { rateLimit } from 'express-rate-limit';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
@@ -10,8 +11,10 @@ import { optionalAuth, requireAuth, secret } from './middleware/auth.js';
 import { canDeleteComment, canDeletePost, canEditComment, getCommentPermissions } from './permissions.js';
 import sequelize from './models/db.js';
 import { prepareAvatar, prepareCover, removeStoredProfileImage, savePreparedProfileImage } from './avatar.js';
+import { apiRateLimitOptions } from './rate-limit.js';
 
 const app = express();
+app.use('/api', rateLimit(apiRateLimitOptions));
 const uploadsPath = path.join(process.cwd(), 'public/uploads');
 mkdirSync(uploadsPath, { recursive: true });
 const upload = multer({ storage: multer.diskStorage({ destination: uploadsPath, filename: (_request, file, callback) => callback(null, `${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g, '-')}`) }) });
