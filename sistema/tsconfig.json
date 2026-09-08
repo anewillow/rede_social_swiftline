@@ -11,5 +11,12 @@
     "jsx": "react-jsx",
     "noEmit": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "client/**/*.ts", "client/**/*.tsx", "vite.config.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "client/**/*.ts",
+    "client/**/*.tsx",
+    "tests/**/*.ts",
+    "vite.config.ts"
+  ]
 }
