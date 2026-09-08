@@ -282,11 +282,9 @@ app.post('/api/auth/register', async (req: Request, res: Response) => {
     where: { [Op.or]: [{ email }, { username: username.trim() }] },
   });
   if (exists)
-    return res
-      .status(400)
-      .json({
-        message: exists.email === email ? 'Email já cadastrado.' : 'Nome de usuário já cadastrado.',
-      });
+    return res.status(400).json({
+      message: exists.email === email ? 'Email já cadastrado.' : 'Nome de usuário já cadastrado.',
+    });
   const user = await User.create({
     username: username.trim(),
     email,
@@ -498,16 +496,6 @@ app.post('/api/posts', requireAuth, upload.single('image'), async (req, res) => 
   return res.status(201).json(post);
 });
 
-app.delete('/api/posts/:id', requireAuth, async (req, res) => {
-  const post = await Post.findByPk(Number(req.params.id));
-  if (!post) return res.status(404).json({ error: 'Post não encontrado' });
-  if (!canDeletePost(req.userId, post.userId)) {
-    return res.status(403).json({ error: 'Você não tem permissão para excluir este post' });
-  }
-  await post.destroy();
-  return res.json({ message: 'Post excluído com sucesso' });
-});
-
 app.post('/api/posts/:id/like', requireAuth, async (req, res) => {
   const post = await Post.findByPk(Number(req.params.id));
   if (!post) return res.status(404).json({ error: 'Post não encontrado' });
@@ -585,19 +573,6 @@ app.post('/api/posts/:id/share', requireAuth, async (req, res) => {
   return res.json({ shares: post.shares });
 });
 
-app.get('/api/posts/:id/comments', optionalAuth, async (req, res) => {
-  const comments = await Comment.findAll({
-    where: { postId: req.params.id },
-    include: [{ model: User, as: 'user', attributes: ['id', 'username', 'avatar'] }],
-    order: [['createdAt', 'ASC']],
-  });
-  const commentsWithPermissions = comments.map((comment) => ({
-    ...comment.toJSON(),
-    permissions: getCommentPermissions(req.userId, comment.userId),
-  }));
-  return res.json(commentsWithPermissions);
-});
-
 app.post('/api/posts/:id/comments', requireAuth, async (req, res) => {
   const content = String(req.body.content ?? '').trim();
   if (!content) return res.status(400).json({ error: 'Comentário obrigatório' });
@@ -619,6 +594,18 @@ app.post('/api/posts/:id/comments', requireAuth, async (req, res) => {
   return res.status(201).json(comment);
 });
 
+// Trecho 1 - Exclusão de posts
+app.delete('/api/posts/:id', requireAuth, async (req, res) => {
+  const post = await Post.findByPk(Number(req.params.id));
+  if (!post) return res.status(404).json({ error: 'Post não encontrado' });
+  if (!canDeletePost(req.userId, post.userId)) {
+    return res.status(403).json({ error: 'Você não tem permissão para excluir este post' });
+  }
+  await post.destroy();
+  return res.json({ message: 'Post excluído com sucesso' });
+});
+
+// Trecho 2 - Edição de comentários
 app.put('/api/posts/comments/:commentId', requireAuth, async (req, res) => {
   const comment = await Comment.findByPk(Number(req.params.commentId));
   const content = String(req.body.content ?? '').trim();
@@ -632,6 +619,7 @@ app.put('/api/posts/comments/:commentId', requireAuth, async (req, res) => {
   return res.json(comment);
 });
 
+// Trecho 3 - Exclusão de comentários
 app.delete('/api/posts/comments/:commentId', requireAuth, async (req, res) => {
   const comment = await Comment.findByPk(Number(req.params.commentId));
   if (!comment) return res.status(404).json({ error: 'Comentário não encontrado' });
@@ -640,6 +628,20 @@ app.delete('/api/posts/comments/:commentId', requireAuth, async (req, res) => {
   }
   await comment.destroy();
   return res.json({ message: 'Comentário excluído com sucesso' });
+});
+
+// Trecho 4 - Listagem de comentários
+app.get('/api/posts/:id/comments', optionalAuth, async (req, res) => {
+  const comments = await Comment.findAll({
+    where: { postId: req.params.id },
+    include: [{ model: User, as: 'user', attributes: ['id', 'username', 'avatar'] }],
+    order: [['createdAt', 'ASC']],
+  });
+  const commentsWithPermissions = comments.map((comment) => ({
+    ...comment.toJSON(),
+    permissions: getCommentPermissions(req.userId, comment.userId),
+  }));
+  return res.json(commentsWithPermissions);
 });
 
 app.post('/api/posts/comments/:commentId/like', requireAuth, async (req, res) => {
