@@ -5,6 +5,7 @@
 | [sistema](./sistema/) | Código da aplicação, dependências, migrações e testes. |
 | [trabalho1_manutencao_corretiva](./trabalho1_manutencao_corretiva/) | Relatórios, apresentação e evidências da manutenção corretiva. |
 | [trabalho2_manutencao_preventiva](./trabalho2_manutencao_preventiva/) | Manutenção preventiva. |
+| [trabalho3_manutencao_adaptativa](./trabalho3_manutencao_adaptativa/) | Plano, documentação e evidências da manutenção adaptativa. |
 
 ## Issues, branches e commits
 
