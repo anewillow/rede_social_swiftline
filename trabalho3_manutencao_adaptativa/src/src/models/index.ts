@@ -1,0 +1,35 @@
+import { Comment } from './Comment.js';
+import { CommentLike } from './CommentLike.js';
+import { Follow } from './Follow.js';
+import { Like } from './Like.js';
+import { Message } from './Message.js';
+import { Notification } from './Notification.js';
+import { Post } from './Post.js';
+import { PostView } from './PostView.js';
+import { Repost } from './Repost.js';
+import { SavedPost } from './SavedPost.js';
+import { User } from './User.js';
+
+User.hasMany(Post, { foreignKey: 'userId', as: 'Posts' });
+Post.belongsTo(User, { foreignKey: 'userId', as: 'User' });
+Post.hasMany(Comment, { foreignKey: 'postId', as: 'comments', onDelete: 'CASCADE' });
+Comment.belongsTo(Post, { foreignKey: 'postId' });
+Comment.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+User.hasMany(Comment, { foreignKey: 'userId', as: 'comments' });
+Like.belongsTo(User, { foreignKey: 'userId' });
+Like.belongsTo(Post, { foreignKey: 'postId' });
+Repost.belongsTo(User, { foreignKey: 'userId' });
+Repost.belongsTo(Post, { foreignKey: 'postId' });
+SavedPost.belongsTo(User, { foreignKey: 'userId' });
+SavedPost.belongsTo(Post, { foreignKey: 'postId' });
+PostView.belongsTo(User, { foreignKey: 'userId' });
+PostView.belongsTo(Post, { foreignKey: 'postId' });
+CommentLike.belongsTo(User, { foreignKey: 'userId' });
+Comment.hasMany(CommentLike, { foreignKey: 'commentId', as: 'likes' });
+User.belongsToMany(User, { as: 'Followers', through: Follow, foreignKey: 'followingId', otherKey: 'followerId' });
+User.belongsToMany(User, { as: 'Following', through: Follow, foreignKey: 'followerId', otherKey: 'followingId' });
+Message.belongsTo(User, { foreignKey: 'senderId', as: 'sender' });
+Message.belongsTo(User, { foreignKey: 'receiverId', as: 'receiver' });
+Notification.belongsTo(User, { foreignKey: 'actorId', as: 'actor' });
+
+export { Comment, CommentLike, Follow, Like, Message, Notification, Post, PostView, Repost, SavedPost, User };
