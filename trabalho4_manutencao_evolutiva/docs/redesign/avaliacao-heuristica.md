@@ -35,7 +35,7 @@ definir as mudanças do redesign.
 
 ## Evidências do redesign
 
-Antes e depois de cada mudança ficarão no documento
+Antes e depois de cada mudança estão no documento
 [Evidências do redesign](./evidencias-redesign.md).
 
 ## Conclusão
