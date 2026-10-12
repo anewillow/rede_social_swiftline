@@ -58,7 +58,7 @@ Os links abaixo apontam para os trechos analisados. Ao final, serão acrescentad
 | Extração de Método | [Métodos extraídos](../sistema/src/app.ts#L265-L359) e [rota simplificada](../sistema/src/app.ts#L361-L375) |
 | Movimentação de Método | [`post-activity.ts`](../sistema/src/post-activity.ts) e [importação em `app.ts`](../sistema/src/app.ts#L39) |
 | Extração de Classe | [`TaylorNewsService`](../sistema/src/taylor-news-service.ts) e [rota de notícias](../sistema/src/app.ts#L450-L464) |
-| Remoção de Código Morto | [Busca ativa em `RightRail`](../sistema/client/App.tsx#L520-L745), [chamada de `SwiftProfile`](../sistema/client/App.tsx#L249) e [evidência completa do antes e depois](issues/04-remocao-de-codigo-morto.md) |
+| Remoção de Código Morto | [Busca ativa em `RightRail`](../sistema/client/App.tsx#L520-L745) e [chamada de `SwiftProfile`](../sistema/client/App.tsx#L249) |
 
 ## 5. Principais aprendizados e dificuldades
 
