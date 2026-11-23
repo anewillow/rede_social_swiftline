@@ -15,14 +15,14 @@ dist/
 # Materiais locais que não fazem parte desta entrega
 sistema/assets/*
 !sistema/assets/swiftline-arquitetura-sistema-v6.png
-config/
+/config/
 sistema/playwright/tests/nt*.spec.js
 sistema/playwright/tests/e2e.spec.js
 sistema/playwright/tests/login-debug.spec.js
 sistema/playwright/tests/video-test.spec.js
 sistema/scripts/*
 !sistema/scripts/run-server-and-tests.ps1
-!sistema/scripts/apply-cover-local.mjs
+!sistema/scripts/test-account-deletion-mysql.mjs
 
 # Resultados e evidências brutas de testes
 test-results/
@@ -32,6 +32,7 @@ coverage/
 
 # Imagens enviadas durante o uso da aplicação
 uploads/
+var/upload-staging/
 sistema/public/uploads/
 
 # Arquivos temporários e backups locais
@@ -52,3 +53,6 @@ PLANO_SWIFTLINE_COMPLETO.tex
 # Logs
 *.log
 npm-debug.log*
+
+# Registros dos testes incluídos na documentação
+!sistema/docs/evidencias/testes-reengenharia/*.log

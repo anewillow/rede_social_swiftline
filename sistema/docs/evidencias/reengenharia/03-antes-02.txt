@@ -1,0 +1,1 @@
+<p>{post.content}</p>{post.image && <img src={post.image} alt="Imagem da publicação"/>}<ProfilePostActions post={post} onUpdate={updatePost}/>

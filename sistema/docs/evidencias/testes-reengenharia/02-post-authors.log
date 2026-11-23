@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: autores das publicações em MySQL descartável
+    # Subtest: criar publicação guarda a referência do autor e mantém os dados esperados pela interface
+    ok 1 - criar publicação guarda a referência do autor e mantém os dados esperados pela interface
+      ---
+      duration_ms: 133.18
+      ...
+    # Subtest: trocar nome e foto altera apenas o perfil e atualiza feed, perfil, salvos e busca
+    ok 2 - trocar nome e foto altera apenas o perfil e atualiza feed, perfil, salvos e busca
+      ---
+      duration_ms: 134.1048
+      ...
+    # Subtest: editar e criar novas publicações devolve o perfil atual do autor
+    ok 3 - editar e criar novas publicações devolve o perfil atual do autor
+      ---
+      duration_ms: 45.904
+      ...
+    # Subtest: o navegador apresenta o nome e a foto atuais no feed, no perfil e nos salvos
+    ok 4 - o navegador apresenta o nome e a foto atuais no feed, no perfil e nos salvos
+      ---
+      duration_ms: 9699.4887
+      ...
+    # Subtest: a migração preserva as cópias em backup, remove as colunas e permite restauração
+    ok 5 - a migração preserva as cópias em backup, remove as colunas e permite restauração
+      ---
+      duration_ms: 1214.8733
+      ...
+    # Subtest: a migração recusa publicações sem usuário válido e conserva as colunas antigas
+    ok 6 - a migração recusa publicações sem usuário válido e conserva as colunas antigas
+      ---
+      duration_ms: 510.0768
+      ...
+    1..6
+ok 1 - autores das publicações em MySQL descartável
+  ---
+  duration_ms: 16804.1364
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 17355.0487

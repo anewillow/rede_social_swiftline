@@ -1,0 +1,6 @@
+      if (user.username !== previousUsername || user.avatar !== previousAvatar) {
+        await Post.update(
+          { author: user.username, avatar: user.avatar },
+          { where: { userId: user.id }, transaction },
+        );
+      }

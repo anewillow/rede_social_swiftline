@@ -4,6 +4,8 @@ import { Follow } from './Follow.js';
 import { Like } from './Like.js';
 import { Message } from './Message.js';
 import { Notification } from './Notification.js';
+import { PollOption } from './PollOption.js';
+import { PollVote } from './PollVote.js';
 import { Post } from './Post.js';
 import { PostView } from './PostView.js';
 import { Repost } from './Repost.js';
@@ -12,6 +14,14 @@ import { User } from './User.js';
 
 User.hasMany(Post, { foreignKey: 'userId', as: 'Posts' });
 Post.belongsTo(User, { foreignKey: 'userId', as: 'User' });
+Post.hasMany(PollOption, { foreignKey: 'postId', as: 'pollOptions', onDelete: 'CASCADE' });
+PollOption.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
+Post.hasMany(PollVote, { foreignKey: 'postId', as: 'pollVotes', onDelete: 'CASCADE' });
+PollVote.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
+PollOption.hasMany(PollVote, { foreignKey: 'optionId', as: 'votes', onDelete: 'CASCADE' });
+PollVote.belongsTo(PollOption, { foreignKey: 'optionId', as: 'option', onDelete: 'CASCADE' });
+User.hasMany(PollVote, { foreignKey: 'userId', as: 'pollVotes', onDelete: 'CASCADE' });
+PollVote.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Post.hasMany(Comment, { foreignKey: 'postId', as: 'comments', onDelete: 'CASCADE' });
 Comment.belongsTo(Post, { foreignKey: 'postId' });
 Comment.belongsTo(User, { foreignKey: 'userId', as: 'user' });
@@ -32,4 +42,18 @@ Message.belongsTo(User, { foreignKey: 'senderId', as: 'sender' });
 Message.belongsTo(User, { foreignKey: 'receiverId', as: 'receiver' });
 Notification.belongsTo(User, { foreignKey: 'actorId', as: 'actor' });
 
-export { Comment, CommentLike, Follow, Like, Message, Notification, Post, PostView, Repost, SavedPost, User };
+export {
+  Comment,
+  CommentLike,
+  Follow,
+  Like,
+  Message,
+  Notification,
+  PollOption,
+  PollVote,
+  Post,
+  PostView,
+  Repost,
+  SavedPost,
+  User,
+};

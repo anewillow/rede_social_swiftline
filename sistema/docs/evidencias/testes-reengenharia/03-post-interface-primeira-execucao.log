@@ -1,0 +1,255 @@
+Prepara uma inst├óncia MySQL exclusiva para a su├¡te post-interface.
+Executa a su├¡te no MySQL tempor├írio.
+TAP version 13
+# Subtest: publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível
+    # Subtest: feed, perfil e salvos oferecem enquetes, a├º├Áes e as mesmas permiss├Áes de coment├írio
+    ok 1 - feed, perfil e salvos oferecem enquetes, a├º├Áes e as mesmas permiss├Áes de coment├írio
+      ---
+      duration_ms: 2248.8267
+      ...
+    # Subtest: curtir, repostar, compartilhar e salvar atualizam a publica├º├úo compartilhada
+    ok 2 - curtir, repostar, compartilhar e salvar atualizam a publica├º├úo compartilhada
+      ---
+      duration_ms: 2593.4013
+      ...
+    # Subtest: criar, editar e excluir coment├írio funciona nas tr├¬s telas
+    ok 3 - criar, editar e excluir coment├írio funciona nas tr├¬s telas
+      ---
+      duration_ms: 5945.2121
+      ...
+    # Subtest: votar a partir de cada tela mant├®m o resultado ao abrir as outras
+    ok 4 - votar a partir de cada tela mant├®m o resultado ao abrir as outras
+      ---
+      duration_ms: 1923.7674
+      ...
+    # Subtest: o autor edita e exclui publica├º├Áes e enquetes em qualquer uma das telas
+    not ok 5 - o autor edita e exclui publica├º├Áes e enquetes em qualquer uma das telas
+      ---
+      duration_ms: 7669.7914
+      location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:210:17'
+      failureType: 'testCodeFailure'
+      error: |-
+        expect(locator).toHaveText(expected) failed
+        
+        Locator:  locator('#post-2').locator('.post-content')
+        Expected: "Pergunta atualizada em feed"
+        Received: "Enquete para feed"
+        Timeout:  5000ms
+        
+        Call log:
+          - Expect "to.have.text" with timeout 5000ms
+          - waiting for locator('#post-2').locator('.post-content')
+            9 ├ù locator resolved to <p class="post-content">Enquete para feed</p>
+              - unexpected value "Enquete para feed"
+        
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Proxy.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\node_modules\playwright\lib\matchers\expect.js:224:24)
+        TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:230:64)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:210:9)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: falhas de intera├º├úo e de coment├írios preservam a tela e permitem tentar novamente
+    not ok 6 - falhas de intera├º├úo e de coment├írios preservam a tela e permitem tentar novamente
+      ---
+      duration_ms: 5381.1297
+      location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:246:17'
+      failureType: 'testCodeFailure'
+      error: |-
+        expect(locator).toBeVisible() failed
+        
+        Locator: locator('#post-1')
+        Expected: visible
+        Timeout: 5000ms
+        Error: element(s) not found
+        
+        Call log:
+          - Expect "to.be.visible" with timeout 5000ms
+          - waiting for locator('#post-1')
+        
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Proxy.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\node_modules\playwright\lib\matchers\expect.js:224:24)
+        openContext (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:90:62)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:247:27)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:246:9)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    1..6
+not ok 1 - publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível
+  ---
+  duration_ms: 35624.603
+  location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:14:22'
+  failureType: 'subtestsFailed'
+  error: '2 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 4
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 35925.27
+2026-11-23T02:09:58.272554Z 0 [System] [MY-015017] [Server] MySQL Server Initialization - start.
+2026-11-23T02:09:58.281196Z 0 [System] [MY-013169] [Server] C:\Program Files\MySQL\MySQL Server 9.6\bin\mysqld.exe (mysqld 9.6.0) initializing of server in progress as process 5172
+2026-11-23T02:09:58.330573Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-11-23T02:10:01.375978Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-11-23T02:10:05.786890Z 5 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2026-11-23T02:10:10.401516Z 0 [System] [MY-015018] [Server] MySQL Server Initialization - end.
+2026-11-23T02:10:10.632571Z 0 [System] [MY-015015] [Server] MySQL Server - start.
+2026-11-23T02:10:10.860641Z 0 [System] [MY-010116] [Server] C:\Program Files\MySQL\MySQL Server 9.6\bin\mysqld.exe (mysqld 9.6.0) starting as process 2524
+2026-11-23T02:10:10.860660Z 0 [System] [MY-015590] [Server] MySQL Server has access to 8 logical CPUs.
+2026-11-23T02:10:10.860676Z 0 [System] [MY-015590] [Server] MySQL Server has access to 8299847680 bytes of physical memory.
+2026-11-23T02:10:10.895667Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2026-11-23T02:10:12.744506Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2026-11-23T02:10:14.204402Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2026-11-23T02:10:14.205107Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2026-11-23T02:10:14.240723Z 0 [System] [MY-010931] [Server] C:\Program Files\MySQL\MySQL Server 9.6\bin\mysqld.exe: ready for connections. Version: '9.6.0'  socket: ''  port: 58219  MySQL Community Server - GPL.
+2026-11-23T02:10:37Z UTC - mysqld got exception 0xc0000005 ;
+Most likely, you have hit a bug, but this error can also be caused by malfunctioning hardware.
+Thread pointer: 0x0
+Attempting backtrace. You can use the following information to find out
+where mysqld died. If you see no messages after this, something went
+terribly wrong...
+7ffac17727a9    ntdll.dll!RtlTryAcquireSRWLockExclusive()
+7ffaa1261689    jemalloc.dll!je_malloc_usable_size()
+7ffaa12601e5    jemalloc.dll!je_malloc_usable_size()
+7ffaa1261e10    jemalloc.dll!je_malloc_usable_size()
+7ffaa1261968    jemalloc.dll!je_malloc_usable_size()
+7ffaa1263733    jemalloc.dll!je_malloc_usable_size()
+7ffaa12303d0    jemalloc.dll!???
+7ff61f10b934    mysqld.exe!???
+7ff61f1b2a0a    mysqld.exe!???
+7ff61f1cc668    mysqld.exe!???
+7ff61f1cc75e    mysqld.exe!???
+7ff61f15b5a5    mysqld.exe!???
+7ff61f2392c1    mysqld.exe!???
+7ff61f2896a0    mysqld.exe!???
+7ff61f1c1154    mysqld.exe!???
+7ff61f224912    mysqld.exe!???
+7ff61f221bb0    mysqld.exe!???
+7ff61f2221c9    mysqld.exe!???
+7ffabe97cd30    ucrtbase.dll!wcsrchr()
+7ffabff3dda7    KERNEL32.DLL!???
+7ffac17d9c6c    ntdll.dll!RtlUserThreadStart()
+The manual page at https://dev.mysql.com/doc/mysql/en/crashing.html contains
+information that should help you find out what is causing the crash.
+
+Arquivos de diagn├│stico preservados em: C:\Users\rhord\AppData\Local\Packages\openai.codex_2p2nqsd0c76g0\AC\#!sandbox.{1ffc43a6-5042-4fb8-90b0-6661974c7fb2}\Temp\swiftline-posts-mysql-U6gyds
+file:///C:/Users/rhord/OneDrive/Documentos/swiftline%20-%20original/sistema/scripts/test-account-deletion-mysql.mjs:44
+    child.once('close', (code) => code === 0 ? resolve(output) : reject(new Error('Comando de teste terminou com c├│digo ' + code + '\n' + output.slice(-6000))));
+                                                                        ^
+
+Error: Comando de teste terminou com c├│digo 1
+TAP version 13
+# Subtest: publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível
+    # Subtest: feed, perfil e salvos oferecem enquetes, a├º├Áes e as mesmas permiss├Áes de coment├írio
+    ok 1 - feed, perfil e salvos oferecem enquetes, a├º├Áes e as mesmas permiss├Áes de coment├írio
+      ---
+      duration_ms: 2248.8267
+      ...
+    # Subtest: curtir, repostar, compartilhar e salvar atualizam a publica├º├úo compartilhada
+    ok 2 - curtir, repostar, compartilhar e salvar atualizam a publica├º├úo compartilhada
+      ---
+      duration_ms: 2593.4013
+      ...
+    # Subtest: criar, editar e excluir coment├írio funciona nas tr├¬s telas
+    ok 3 - criar, editar e excluir coment├írio funciona nas tr├¬s telas
+      ---
+      duration_ms: 5945.2121
+      ...
+    # Subtest: votar a partir de cada tela mant├®m o resultado ao abrir as outras
+    ok 4 - votar a partir de cada tela mant├®m o resultado ao abrir as outras
+      ---
+      duration_ms: 1923.7674
+      ...
+    # Subtest: o autor edita e exclui publica├º├Áes e enquetes em qualquer uma das telas
+    not ok 5 - o autor edita e exclui publica├º├Áes e enquetes em qualquer uma das telas
+      ---
+      duration_ms: 7669.7914
+      location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:210:17'
+      failureType: 'testCodeFailure'
+      error: |-
+        expect(locator).toHaveText(expected) failed
+        
+        Locator:  locator('#post-2').locator('.post-content')
+        Expected: "Pergunta atualizada em feed"
+        Received: "Enquete para feed"
+        Timeout:  5000ms
+        
+        Call log:
+          - Expect "to.have.text" with timeout 5000ms
+          - waiting for locator('#post-2').locator('.post-content')
+            9 ├ù locator resolved to <p class="post-content">Enquete para feed</p>
+              - unexpected value "Enquete para feed"
+        
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Proxy.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\node_modules\playwright\lib\matchers\expect.js:224:24)
+        TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:230:64)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:210:9)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    # Subtest: falhas de intera├º├úo e de coment├írios preservam a tela e permitem tentar novamente
+    not ok 6 - falhas de intera├º├úo e de coment├írios preservam a tela e permitem tentar novamente
+      ---
+      duration_ms: 5381.1297
+      location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:246:17'
+      failureType: 'testCodeFailure'
+      error: |-
+        expect(locator).toBeVisible() failed
+        
+        Locator: locator('#post-1')
+        Expected: visible
+        Timeout: 5000ms
+        Error: element(s) not found
+        
+        Call log:
+          - Expect "to.be.visible" with timeout 5000ms
+          - waiting for locator('#post-1')
+        
+      code: 'ERR_TEST_FAILURE'
+      stack: |-
+        Proxy.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\node_modules\playwright\lib\matchers\expect.js:224:24)
+        openContext (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:90:62)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:247:27)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async TestContext.<anonymous> (C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\dist\tests\integration\post-interface.mysql.test.js:246:9)
+        async Test.run (node:internal/test_runner/test:935:9)
+        async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+      ...
+    1..6
+not ok 1 - publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível
+  ---
+  duration_ms: 35624.603
+  location: 'C:\\Users\\rhord\\OneDrive\\Documentos\\swiftline - original\\sistema\\dist\\tests\\integration\\post-interface.mysql.test.js:14:22'
+  failureType: 'subtestsFailed'
+  error: '2 subtests failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 4
+# fail 3
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 35925.27
+
+    at ChildProcess.<anonymous> (file:///C:/Users/rhord/OneDrive/Documentos/swiftline%20-%20original/sistema/scripts/test-account-deletion-mysql.mjs:44:73)
+    at Object.onceWrapper (node:events:639:26)
+    at ChildProcess.emit (node:events:524:28)
+    at maybeClose (node:internal/child_process:1101:16)
+    at ChildProcess._handle.onexit (node:internal/child_process:304:5)
+
+Node.js v22.12.0

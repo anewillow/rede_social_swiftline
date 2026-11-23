@@ -1,0 +1,7 @@
+    await dependencies.unitOfWork.run(async (modules) => {
+      await modules.posts.removeAccountData(account.id);
+      await modules.network.removeAccountData(account.id);
+      await modules.messages.removeAccountData(account.id);
+      await modules.notifications.removeAccountData(account.id);
+      await modules.accounts.removeAccount(account.id);
+    });

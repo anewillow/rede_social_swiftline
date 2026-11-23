@@ -1,0 +1,68 @@
+[
+  {
+    "name": "endereco de salvos abre feed ao carregar novamente",
+    "evidence": {
+      "endereco": "/saved.html",
+      "telaExibida": "feed"
+    }
+  },
+  {
+    "name": "sessao rejeitada continua com usuario e token locais",
+    "evidence": {
+      "respostaDeValidacao": 401,
+      "interfaceAutenticadaPermanece": true,
+      "dadosDeSessaoPermanecem": {
+        "user": true,
+        "token": true
+      }
+    }
+  },
+  {
+    "name": "resposta antiga de conversa sobrescreve a conversa atual",
+    "evidence": {
+      "conversaSelecionada": "Bob",
+      "historicoExibidoAposRespostaAtrasada": "Alice"
+    }
+  },
+  {
+    "name": "mesma enquete nao aparece no perfil e nos salvos",
+    "evidence": {
+      "feedExibeEnquete": true,
+      "perfilExibeEnquete": false,
+      "salvosExibemEnquete": false
+    }
+  },
+  {
+    "name": "edicao de comentario difere entre feed e perfil",
+    "evidence": {
+      "comentarioProprioEditavelNoFeed": true,
+      "mesmoControleNoPerfil": false
+    }
+  },
+  {
+    "name": "estado inicial de seguir nao consulta a relacao existente",
+    "evidence": {
+      "rotuloInicial": "Seguir",
+      "consultaDaRelacaoAtualExecutada": false,
+      "relacaoDaFixture": "já seguindo"
+    }
+  },
+  {
+    "name": "localizacao e site preenchidos nao sao enviados nem mantidos",
+    "evidence": {
+      "localizacaoEnviada": false,
+      "siteEnviado": false,
+      "valoresAoReabrir": [
+        "",
+        ""
+      ]
+    }
+  },
+  {
+    "name": "falha de comentarios pode interromper a renderizacao da tela",
+    "evidence": {
+      "respostaDaAPI": 503,
+      "erroJavaScript": "n.map is not a function"
+    }
+  }
+]

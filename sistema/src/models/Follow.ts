@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from './db.js';
+import sequelize from '../config/database.js';
 
 export class Follow extends Model { declare followerId: number; declare followingId: number; }
 Follow.init({

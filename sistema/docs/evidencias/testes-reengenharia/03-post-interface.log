@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: publicação compartilhada nas três telas com MySQL descartável
+    # Subtest: feed, perfil e salvos oferecem enquetes, ações e as mesmas permissões de comentário
+    ok 1 - feed, perfil e salvos oferecem enquetes, ações e as mesmas permissões de comentário
+      ---
+      duration_ms: 1941.2327
+      ...
+    # Subtest: curtir, repostar, compartilhar e salvar atualizam a publicação compartilhada
+    ok 2 - curtir, repostar, compartilhar e salvar atualizam a publicação compartilhada
+      ---
+      duration_ms: 2539.5393
+      ...
+    # Subtest: criar, editar e excluir comentário funciona nas três telas
+    ok 3 - criar, editar e excluir comentário funciona nas três telas
+      ---
+      duration_ms: 2890.0512
+      ...
+    # Subtest: votar a partir de cada tela mantém o resultado ao abrir as outras
+    ok 4 - votar a partir de cada tela mantém o resultado ao abrir as outras
+      ---
+      duration_ms: 2303.3947
+      ...
+    # Subtest: o autor edita e exclui publicações e enquetes em qualquer uma das telas
+    ok 5 - o autor edita e exclui publicações e enquetes em qualquer uma das telas
+      ---
+      duration_ms: 8561.4893
+      ...
+    # Subtest: falhas de interação e de comentários preservam a tela e permitem tentar novamente
+    ok 6 - falhas de interação e de comentários preservam a tela e permitem tentar novamente
+      ---
+      duration_ms: 1287.4071
+      ...
+    1..6
+ok 1 - publicação compartilhada nas três telas com MySQL descartável
+  ---
+  duration_ms: 32505.0468
+  ...
+1..1
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 32944.9297

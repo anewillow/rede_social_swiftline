@@ -1,0 +1,9 @@
+async function deleteAccountRecords(user: User) {
+  await sequelize.transaction(async (transaction) => {
+    const { postIds, commentIds } = await findAccountContentIds(user.id, transaction);
+    await deleteAccountInteractions(user.id, postIds, commentIds, transaction);
+    await deleteAccountRelationships(user.id, transaction);
+    await deleteAccountContent(user, postIds, transaction);
+  });
+}
+

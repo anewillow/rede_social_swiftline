@@ -1,0 +1,9 @@
+    comment: (input: { userId: number; postId: number; content: string }) => unitOfWork.run(async ({ accounts, posts, notifications }) => {
+      const post = await posts.lockPost(input.postId);
+      if (!post) throw new InteractionError('POST_NOT_FOUND');
+      const actor = await accounts.findById(input.userId);
+      if (!actor) throw new InteractionError('USER_NOT_FOUND');
+      const comment = await posts.addComment(post.id, actor.id, input.content);
+      if (post.userId !== actor.id) await notifications.record({ userId: post.userId, actorId: actor.id, type: 'comment', message: `${actor.username} respondeu à sua publicação.` });
+      return { ...comment, user: actor };
+    }),

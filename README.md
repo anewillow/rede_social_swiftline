@@ -1,5 +1,7 @@
 # Swiftline
 
+[Reengenharia arquitetural](sistema/docs/reengenharia-arquitetural.md) · [Testes no GitHub Actions](sistema/docs/testes-no-github.md)
+
 | Pasta | Conteúdo |
 | --- | --- |
 | [sistema](./sistema/) | Código da aplicação, dependências, migrações e testes. |

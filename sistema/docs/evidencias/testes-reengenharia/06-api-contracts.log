@@ -1,0 +1,72 @@
+TAP version 13
+# Subtest: contratos v2 e recuperação das telas em MySQL descartável
+    # Subtest: listas limitam a consulta, preservam empates e entregam todas as páginas sem repetição
+    ok 1 - listas limitam a consulta, preservam empates e entregam todas as páginas sem repetição
+      ---
+      duration_ms: 468.6083
+      ...
+    # Subtest: o mesmo limite Unicode vale para criar, editar e alterar a pergunta da enquete
+    ok 2 - o mesmo limite Unicode vale para criar, editar e alterar a pergunta da enquete
+      ---
+      duration_ms: 218.8096
+      ...
+    # Subtest: localização e site sobrevivem à atualização e a uma nova leitura do perfil
+    ok 3 - localização e site sobrevivem à atualização e a uma nova leitura do perfil
+      ---
+      duration_ms: 38.0644
+      ...
+    # Subtest: repetir o estado desejado não desfaz curtida, salvo, repostagem, seguir nem voto
+    ok 4 - repetir o estado desejado não desfaz curtida, salvo, repostagem, seguir nem voto
+      ---
+      duration_ms: 318.4613
+      ...
+    # Subtest: sessão inválida, credenciais incorretas e entrada malformada possuem códigos distintos
+    ok 5 - sessão inválida, credenciais incorretas e entrada malformada possuem códigos distintos
+      ---
+      duration_ms: 43.9342
+      ...
+# Falha na solicitação c7f26cf1-91c3-421a-9473-19eaa59e8b83
+    # Subtest: falha do banco responde JSON genérico sem SQL nem detalhes privados
+    ok 6 - falha do banco responde JSON genérico sem SQL nem detalhes privados
+      ---
+      duration_ms: 4.6052
+      ...
+    # Subtest: salvos abre por endereço, recarrega, pagina e mantém voltar/avançar
+    ok 7 - salvos abre por endereço, recarrega, pagina e mantém voltar/avançar
+      ---
+      duration_ms: 2143.5956
+      ...
+    # Subtest: lista inválida e HTML viram aviso com nova tentativa sem derrubar a tela
+    ok 8 - lista inválida e HTML viram aviso com nova tentativa sem derrubar a tela
+      ---
+      duration_ms: 965.465
+      ...
+    # Subtest: troca rápida de conversa ignora resposta atrasada e apresenta só as mensagens escolhidas
+    ok 9 - troca rápida de conversa ignora resposta atrasada e apresenta só as mensagens escolhidas
+      ---
+      duration_ms: 1362.0808
+      ...
+    # Subtest: sessão expirada abre login; senha incorreta na exclusão conserva conta e sessão
+    ok 10 - sessão expirada abre login; senha incorreta na exclusão conserva conta e sessão
+      ---
+      duration_ms: 809.8817
+      ...
+    # Subtest: cópia local na versão 5 recebe a migração 6 sem alterar valores anteriores
+    ok 11 - cópia local na versão 5 recebe a migração 6 sem alterar valores anteriores # SKIP
+      ---
+      duration_ms: 0.2371
+      ...
+    1..11
+ok 1 - contratos v2 e recuperação das telas em MySQL descartável
+  ---
+  duration_ms: 15363.5312
+  ...
+1..1
+# tests 12
+# suites 0
+# pass 11
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 15593.1593

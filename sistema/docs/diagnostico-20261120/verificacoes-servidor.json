@@ -1,0 +1,89 @@
+[
+  {
+    "name": "upload sem filtro no servidor",
+    "evidence": {
+      "status": 201,
+      "arquivoDeTextoAceitoComoImagem": true,
+      "arquivoServidoPublicamente": true
+    }
+  },
+  {
+    "name": "arquivo permanece apos publicacao rejeitada",
+    "evidence": {
+      "status": 400,
+      "arquivosRestantes": 1
+    }
+  },
+  {
+    "name": "arquivo permanece apos exclusao de publicacao",
+    "evidence": {
+      "status": 200,
+      "arquivoDaPublicacaoPermanece": true
+    }
+  },
+  {
+    "name": "limites de texto diferentes entre criar editar e modelo",
+    "evidence": {
+      "criarAceita281CaracteresAntesDoBanco": true,
+      "editarRejeita281": true,
+      "tipoNoModelo": "VARCHAR(255)",
+      "limiteDaTela": 280
+    }
+  },
+  {
+    "name": "comentario criado mesmo quando notificacao falha",
+    "evidence": {
+      "respostas": [
+        500,
+        500
+      ],
+      "criacoesDeComentarioExecutadas": 2,
+      "bancoRealUsado": false
+    }
+  },
+  {
+    "name": "dois compartilhamentos simultaneos perdem uma contagem",
+    "evidence": {
+      "pedidosBemSucedidos": 2,
+      "contadorFinal": 1,
+      "esperado": 2,
+      "bancoRealUsado": false
+    }
+  },
+  {
+    "name": "listagem ignora parametros de paginacao",
+    "evidence": {
+      "limitAplicado": false,
+      "offsetAplicado": false
+    }
+  },
+  {
+    "name": "erro inesperado da API usa HTML",
+    "evidence": {
+      "status": 500,
+      "tipoDaResposta": "text/html; charset=utf-8"
+    }
+  },
+  {
+    "name": "cache de noticias repete consultas simultaneas",
+    "evidence": {
+      "pedidosIguaisSimultaneos": 2,
+      "consultasExternasSimuladas": 2,
+      "acessoExternoReal": false
+    }
+  },
+  {
+    "name": "configuracao aceita ausencia de segredo JWT",
+    "evidence": {
+      "segredoPadraoUsadoSemVariavel": true
+    }
+  },
+  {
+    "name": "inicializacao atualiza avatar mesmo sem consultar esse campo",
+    "evidence": {
+      "campoAvatarConsultado": false,
+      "atualizacoesExecutadas": 1,
+      "inicializacaoEBancoSimulados": true
+    }
+  }
+]

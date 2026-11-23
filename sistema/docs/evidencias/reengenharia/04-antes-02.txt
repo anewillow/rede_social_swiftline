@@ -1,0 +1,2 @@
+    "prepare:database": "tsc -p tsconfig.server.json && node scripts/apply-cover-local.mjs",
+    "prestart": "npm run prepare:database",

@@ -7,10 +7,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "tests/profile-avatar.test.ts",
-    "tests/profile-cover.test.ts",
-    "tests/permissions.test.ts",
-    "tests/rate-limit.test.ts"
+    "shared/**/*.ts",
+    "tests/**/*.ts"
   ],
   "exclude": [
     "node_modules",

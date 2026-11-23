@@ -1,0 +1,1 @@
+    try { return decode(body); } catch { throw new ApiError('INVALID_RESPONSE', 'Os dados recebidos estão incompletos. Tente novamente.', response.status); }
