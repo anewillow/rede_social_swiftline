@@ -3,6 +3,7 @@ name: Testes da reengenharia
 on:
   push:
     branches:
+      - main
       - reengenharia-arquitetural
   workflow_dispatch:
 

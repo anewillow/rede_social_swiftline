@@ -268,6 +268,43 @@ test('publicação compartilhada nas três telas com MySQL descartável', {
       await expect(comments.getByRole('alert')).toHaveCount(0);
       assert.deepEqual(errors, []);
     });
+    await t.test('a prévia rejeita SVG e publica uma imagem PNG sem interpretar o nome como HTML', async () => {
+      const author = await openContext(viewer);
+      const dialogs: string[] = [];
+      author.page.on('dialog', (dialog) => { dialogs.push(dialog.message()); void dialog.dismiss(); });
+      try {
+        const input = author.page.locator('.composer input[type="file"]');
+        await input.setInputFiles({ name: 'imagem.svg', mimeType: 'image/svg+xml', buffer: Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"/>') });
+        await expect(author.page.locator('.image-validation-error')).toContainText('Formato não aceito');
+        await expect(author.page.getByAltText('Prévia da imagem selecionada')).toHaveCount(0);
+
+        const png = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=', 'base64');
+        const filename = 'foto-<svg onload=alert(1)>.png';
+        await input.setInputFiles({ name: filename, mimeType: 'image/png', buffer: png });
+        const preview = author.page.getByAltText('Prévia da imagem selecionada');
+        await expect(preview).toHaveAttribute('src', /^data:image\/png;base64,[A-Za-z0-9+/]+={0,2}$/);
+        await expect.poll(() => preview.evaluate((image) => (image as HTMLImageElement).naturalWidth)).toBe(1);
+        await expect(author.page.locator('.image-attachment-info strong')).toHaveText(filename);
+        await expect(author.page.locator('.image-attachment-info svg')).toHaveCount(0);
+
+        const content = 'Publicação com prévia segura ' + tag;
+        await author.page.locator('#post-text').fill(content);
+        const [response] = await Promise.all([
+          author.page.waitForResponse((result) => result.request().method() === 'POST' && new URL(result.url()).pathname === '/api/v2/posts'),
+          author.page.locator('.composer').getByRole('button', { name: 'Postar', exact: true }).click(),
+        ]);
+        const published = await response.json();
+        assert.equal(response.status(), 201, JSON.stringify(published));
+        await expect(card(author.page, published.id)).toBeVisible();
+        const saved = await Post.findByPk(published.id);
+        assert.equal(saved?.content, content);
+        assert.ok(saved?.image);
+        assert.deepEqual(dialogs, []);
+        assert.deepEqual(errors, []);
+      } finally {
+        await author.context.close();
+      }
+    });
   } finally {
     if (browser) await browser.close();
     if (server) await new Promise<void>((resolve, reject) => server!.close((error) => error ? reject(error) : resolve()));

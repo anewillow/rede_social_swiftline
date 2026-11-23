@@ -3,10 +3,11 @@ import { randomUUID } from 'node:crypto';
 import { mkdirSync } from 'node:fs';
 import { unlink } from 'node:fs/promises';
 import path from 'node:path';
-import type { RequestHandler } from 'express';
+import type { Request, RequestHandler } from 'express';
 import { stagedUploadsPath } from '../config/paths.js';
 
 class UnsupportedUpload extends Error {}
+const stagedFiles = new WeakMap<Request, string>();
 mkdirSync(stagedUploadsPath, { recursive: true });
 const receive = multer({
   limits: { fileSize: 3 * 1024 * 1024, files: 1, fields: 20 },
@@ -16,14 +17,21 @@ const receive = multer({
   },
   storage: multer.diskStorage({
     destination: stagedUploadsPath,
-    filename: (_request, _file, callback) => callback(null, randomUUID() + '.upload'),
+    filename: (request, _file, callback) => {
+      const filename = randomUUID() + '.upload';
+      stagedFiles.set(request, path.join(stagedUploadsPath, filename));
+      callback(null, filename);
+    },
   }),
 }).single('image');
 
 export const receivePostImage: RequestHandler = (req, res, next) => {
   receive(req, res, (error) => {
     const cleanup = () => {
-      if (req.file && path.dirname(path.resolve(req.file.path)) === path.resolve(stagedUploadsPath)) void unlink(req.file.path).catch(() => {});
+      const stagedFile = stagedFiles.get(req);
+      if (!stagedFile) return;
+      stagedFiles.delete(req);
+      void unlink(stagedFile).catch(() => {});
     };
     res.once('finish', cleanup); res.once('close', cleanup);
     if (error instanceof UnsupportedUpload) { cleanup(); res.status(415).json({ message: 'Selecione uma imagem PNG, JPEG, GIF ou WebP.' }); return; }

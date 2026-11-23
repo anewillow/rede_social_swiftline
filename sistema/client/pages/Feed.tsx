@@ -4,6 +4,7 @@ import { Avatar } from '../components/common/Avatar';
 import { Empty } from '../components/common/Empty';
 import { PostCard, PostListFeedback, usePostList } from '../features/posts';
 import { formatFileSize } from '../utils/format-file-size';
+import { safeImagePreview } from '../utils/image-preview';
 import type { User } from '../types/index';
 import { MAX_POST_IMAGE_SIZE, POST_IMAGE_TYPES } from '../config/constants';
 import { postsApi } from '../services/posts-api';
@@ -51,13 +52,21 @@ export function Feed({
     requestAnimationFrame(() => document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
   }, [loading, tab, focusId, focused]);
   useEffect(() => {
-    if (!image) {
-      setImagePreview('');
-      return;
-    }
-    const previewUrl = URL.createObjectURL(image);
-    setImagePreview(previewUrl);
-    return () => URL.revokeObjectURL(previewUrl);
+    setImagePreview('');
+    if (!image) return;
+    const reader = new FileReader();
+    let active = true;
+    reader.onload = () => {
+      if (!active) return;
+      const preview = safeImagePreview(reader.result);
+      setImagePreview(preview ?? '');
+      if (!preview) setImageError('Não foi possível preparar a prévia da imagem.');
+    };
+    reader.onerror = () => {
+      if (active) setImageError('Não foi possível ler a imagem selecionada.');
+    };
+    reader.readAsDataURL(image);
+    return () => { active = false; reader.abort(); };
   }, [image]);
   useEffect(() => {
     if (!showImageHint) return;
@@ -172,7 +181,7 @@ export function Feed({
           {image && (
             <div className="image-attachment">
               <div className="image-attachment-preview">
-                <img src={imagePreview} alt="Prévia da imagem selecionada" />
+                <img src={safeImagePreview(imagePreview)} alt="Prévia da imagem selecionada" />
                 <button
                   type="button"
                   className="image-attachment-remove"

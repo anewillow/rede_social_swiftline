@@ -4,7 +4,7 @@ O fluxo **Testes da reengenharia** executa o código do Swiftline em máquinas d
 
 ## Primeiro envio
 
-O envio do código para a branch `reengenharia-arquitetural` inicia o fluxo automaticamente. Os sete grupos aparecem na aba **Actions**: a verificação geral e os seis casos da reengenharia.
+O envio do código para `main` ou `reengenharia-arquitetural` inicia o fluxo automaticamente. Os sete grupos aparecem na aba **Actions**: a verificação geral e os seis casos da reengenharia.
 
 ## Repetir uma execução
 
