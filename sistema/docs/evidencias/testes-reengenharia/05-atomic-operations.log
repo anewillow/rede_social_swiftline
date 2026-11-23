@@ -1,0 +1,88 @@
+TAP version 13
+# Falha na solicitação 51c5026f-b595-485c-9684-01c2469068f4
+# Subtest: operações e limpeza recuperável em MySQL descartável
+    # Subtest: comment: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+    ok 1 - comment: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+      ---
+      duration_ms: 175.5231
+      ...
+# Falha na solicitação 9f8568d8-d4a3-4f0a-9c66-4725fe27f109
+    # Subtest: like: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+    ok 2 - like: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+      ---
+      duration_ms: 94.2823
+      ...
+# Falha na solicitação c32c27bd-6a87-4ba9-b459-6173303aface
+    # Subtest: follow: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+    ok 3 - follow: falha da notificação desfaz a ação, e a tentativa seguinte conclui ambas
+      ---
+      duration_ms: 73.0896
+      ...
+    # Subtest: pedidos simultâneos preservam contagens, relações únicas e um voto por pessoa
+    ok 4 - pedidos simultâneos preservam contagens, relações únicas e um voto por pessoa
+      ---
+      duration_ms: 356.7732
+      ...
+    # Subtest: imagens rejeitadas saem da área privada e não entram no armazenamento definitivo
+    ok 5 - imagens rejeitadas saem da área privada e não entram no armazenamento definitivo
+      ---
+      duration_ms: 216.2484
+      ...
+# Falha na solicitação adf3afbc-9967-4074-a1f5-be9cb8775c35
+# Falha na solicitação 909030c6-d4aa-4129-b6ec-1a40580aba74
+    # Subtest: falha na enquete ou na montagem da resposta desfaz a publicação e remove a imagem nova
+    ok 6 - falha na enquete ou na montagem da resposta desfaz a publicação e remove a imagem nova
+      ---
+      duration_ms: 300.4952
+      ...
+    # Subtest: a exclusão confirma o banco e mantém uma tarefa durável se o disco falhar
+    ok 7 - a exclusão confirma o banco e mantém uma tarefa durável se o disco falhar
+      ---
+      duration_ms: 104.3984
+      ...
+    # Subtest: uma imagem ainda referenciada fica preservada até a última exclusão
+    ok 8 - uma imagem ainda referenciada fica preservada até a última exclusão
+      ---
+      duration_ms: 152.0329
+      ...
+    # Subtest: perfil: falha no banco preserva as imagens antigas e alterações paralelas não perdem campos
+    ok 9 - perfil: falha no banco preserva as imagens antigas e alterações paralelas não perdem campos
+      ---
+      duration_ms: 209.3528
+      ...
+# Falha na solicitação 631a8bff-4d1d-4307-90eb-99d1326831ae
+    # Subtest: resposta perdida após o commit preserva a imagem que o banco já referencia
+    ok 10 - resposta perdida após o commit preserva a imagem que o banco já referencia
+      ---
+      duration_ms: 66.5897
+      ...
+# Falha na solicitação 4896722c-0172-411f-93c0-ba4ac92d3dfb
+    # Subtest: a exclusão de conta grava as tarefas junto dos dados e uma falha desfaz tudo
+    ok 11 - a exclusão de conta grava as tarefas junto dos dados e uma falha desfaz tudo
+      ---
+      duration_ms: 210.7762
+      ...
+    # Subtest: reconciliação após interrupção trata só arquivos próprios antigos e para sem o banco
+    ok 12 - reconciliação após interrupção trata só arquivos próprios antigos e para sem o banco
+      ---
+      duration_ms: 80.017
+      ...
+    # Subtest: cópia da base local recebe apenas a nova fila e conserva o histórico anterior
+    ok 13 - cópia da base local recebe apenas a nova fila e conserva o histórico anterior # SKIP
+      ---
+      duration_ms: 0.1096
+      ...
+    1..13
+ok 1 - operações e limpeza recuperável em MySQL descartável
+  ---
+  duration_ms: 7476.9149
+  ...
+1..1
+# tests 14
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 7721.9333

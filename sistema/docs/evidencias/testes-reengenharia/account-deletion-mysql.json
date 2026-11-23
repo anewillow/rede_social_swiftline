@@ -1,0 +1,7 @@
+{
+  "database": "MySQL",
+  "version": "9.6.0",
+  "isolated": true,
+  "passed": true,
+  "output": "TAP version 13\n# Subtest: exclusão de conta em MySQL descartável\n    # Subtest: a rota exclui todos os dados relacionados e preserva os dados das outras pessoas\n    ok 1 - a rota exclui todos os dados relacionados e preserva os dados das outras pessoas\n      ---\n      duration_ms: 438.2697\n      ...\n    # Subtest: uma falha depois de remover conteúdo e mensagens desfaz todas as alterações no banco\n    ok 2 - uma falha depois de remover conteúdo e mensagens desfaz todas as alterações no banco\n      ---\n      duration_ms: 550.7882\n      ...\n    # Subtest: senha incorreta não altera registros nem remove as imagens\n    ok 3 - senha incorreta não altera registros nem remove as imagens\n      ---\n      duration_ms: 156.4241\n      ...\n    # Subtest: a exclusão também funciona para uma conta sem publicações ou interações\n    ok 4 - a exclusão também funciona para uma conta sem publicações ou interações\n      ---\n      duration_ms: 127.223\n      ...\n    1..4\nok 1 - exclusão de conta em MySQL descartável\n  ---\n  duration_ms: 7605.7483\n  ...\n1..1\n# tests 5\n# suites 0\n# pass 5\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 7848.3171\n"
+}

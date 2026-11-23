@@ -1,0 +1,8 @@
+    const response = await fetch(endpoint, { ...options, headers, signal: controller.signal });
+    const contentType = response.headers.get('content-type') ?? '';
+    if (!contentType.toLowerCase().includes('application/json')) throw new ApiError('INVALID_RESPONSE', 'O servidor enviou uma resposta inesperada. Tente novamente.', response.status);
+    let body: unknown;
+    try { body = await response.json(); } catch { throw new ApiError('INVALID_RESPONSE', 'Não foi possível ler a resposta do servidor.', response.status); }
+    if (!response.ok) {
+      let failure: ApiFailure;
+      try { failure = decodeFailure(body); } catch { throw new ApiError('INVALID_RESPONSE', 'O servidor enviou uma falha em formato inesperado.', response.status); }

@@ -1,0 +1,5 @@
+{
+  "content": { "type": "TEXT", "allowNull": true, "defaultValue": null, "autoIncrement": false },
+  "location": { "type": "VARCHAR(120)", "allowNull": true, "defaultValue": "", "autoIncrement": false },
+  "website": { "type": "VARCHAR(2048)", "allowNull": true, "defaultValue": "", "autoIncrement": false }
+}

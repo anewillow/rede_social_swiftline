@@ -1,0 +1,6 @@
+  const load = async () => {
+    const response = await fetch(`/api/posts/${postId}/comments`, { headers: headers() });
+    const comments = await response.json();
+    setItems(comments);
+    onCountChange(comments.length);
+  };

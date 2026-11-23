@@ -1,0 +1,1054 @@
+{
+  "users": {
+    "name": "Users",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "username": {
+        "type": "VARCHAR(255)",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "email": {
+        "type": "VARCHAR(255)",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "password": {
+        "type": "VARCHAR(255)",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "bio": {
+        "type": "TEXT",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "avatar": {
+        "type": "VARCHAR(255)",
+        "allowNull": true,
+        "defaultValue": "",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "displayName": {
+        "type": "VARCHAR(255)",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "lastUsernameChange": {
+        "type": "DATETIME",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "cover": {
+        "type": "VARCHAR(255)",
+        "allowNull": true,
+        "defaultValue": "",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "role": {
+        "type": "VARCHAR(20)",
+        "allowNull": false,
+        "defaultValue": "user",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": []
+  },
+  "posts": {
+    "name": "posts",
+    "columns": {
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "image": {
+        "type": "VARCHAR(255)",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "content": {
+        "type": "VARCHAR(255)",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "likes": {
+        "type": "INT",
+        "allowNull": true,
+        "defaultValue": "0",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "shares": {
+        "type": "INT",
+        "allowNull": true,
+        "defaultValue": "0",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "isStory": {
+        "type": "TINYINT(1)",
+        "allowNull": true,
+        "defaultValue": "0",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": true,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "comments": {
+    "name": "Comments",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "content": {
+        "type": "TEXT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "commentlikes": {
+    "name": "CommentLikes",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "commentId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "commentId"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "commentId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "commentId",
+        "table": "comments",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "follows": {
+    "name": "Follows",
+    "columns": {
+      "followerId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "followingId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "followerId",
+          "followingId"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "followerId",
+          "followingId"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "followerId",
+          "followingId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "followerId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "followingId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "likes": {
+    "name": "Likes",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "postId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "messages": {
+    "name": "Messages",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "senderId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "receiverId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "content": {
+        "type": "TEXT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "senderId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "receiverId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "notifications": {
+    "name": "Notifications",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "actorId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "type": {
+        "type": "ENUM('follow','like','comment')",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "message": {
+        "type": "VARCHAR(255)",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "isRead": {
+        "type": "TINYINT(1)",
+        "allowNull": true,
+        "defaultValue": "0",
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "actorId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "postviews": {
+    "name": "PostViews",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "postId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "reposts": {
+    "name": "Reposts",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "postId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "savedposts": {
+    "name": "SavedPosts",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "userId",
+          "postId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "RESTRICT",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "poll_options": {
+    "name": "poll_options",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "text": {
+        "type": "VARCHAR(80)",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "position": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  },
+  "poll_votes": {
+    "name": "poll_votes",
+    "columns": {
+      "id": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": true,
+        "autoIncrement": true,
+        "comment": null
+      },
+      "postId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "optionId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "userId": {
+        "type": "INT",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false,
+        "defaultValue": null,
+        "primaryKey": false,
+        "autoIncrement": false,
+        "comment": null
+      }
+    },
+    "indexes": [
+      {
+        "primary": true,
+        "fields": [
+          "id"
+        ]
+      },
+      {
+        "primary": false,
+        "fields": [
+          "postId",
+          "userId"
+        ]
+      }
+    ],
+    "references": [
+      {
+        "column": "postId",
+        "table": "posts",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "optionId",
+        "table": "poll_options",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      },
+      {
+        "column": "userId",
+        "table": "users",
+        "key": "id",
+        "onDelete": "CASCADE",
+        "onUpdate": "CASCADE"
+      }
+    ]
+  }
+}

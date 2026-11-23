@@ -1,0 +1,357 @@
+
+> swiftline-social@1.0.0 test
+> npm run build && npm run build:server && node --test dist/tests/unit/*.test.js dist/tests/integration/*.test.js tests/security/*.test.mjs
+
+
+> swiftline-social@1.0.0 build
+> tsc --noEmit && vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - ESM syntax in a file loaded as CommonJS (vite.config.ts:1:1). Use a `.mjs` extension or set `"type": "module"` in the closest package.json
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.2.2 building client environment for production...
+(node:27940) ExperimentalWarning: CommonJS module C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\vite.config.ts is loading ES Module C:\Users\rhord\OneDrive\Documentos\swiftline - original\sistema\node_modules\vite\dist\node\index.js using require().
+Support for loading ES Module in require() is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+transforming...
+[vite:css][postcss] @import statements must precede all other statements (besides @charset or empty @layer) and be consecutive
+1  |  .composer>div>div { min-width:0; }.composer>div>div>div:last-child { display:flex; align-items:center; gap:10px; padd...
+2  |  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&fa...
+   |  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3  |  
+4  |  :root { --ink:#251e22; --muted:#75656c; --line:#eadfe2; --paper:#fffdfc; --page:#faf7f5; --wine:#9d3852; --wine-dark:...
+Ô£ô 1847 modules transformed.
+rendering chunks...
+computing gzip size...
+client-dist/index.html                                             0.47 kB Ôöé gzip:  0.31 kB
+client-dist/assets/swiftline-register-background-ByQRaJ00.png  1,206.73 kB
+client-dist/assets/index-CoEOHHn5.css                             83.01 kB Ôöé gzip: 15.79 kB
+client-dist/assets/index-Ds_zcVQs.js                             279.03 kB Ôöé gzip: 84.63 kB
+
+Ô£ô built in 1.30s
+
+> swiftline-social@1.0.0 build:server
+> tsc -p tsconfig.server.json
+
+TAP version 13
+# Subtest: a exclus├úo preserva as respostas de autentica├º├úo, conta ausente e confirma├º├úo de senha
+ok 1 - a exclus├úo preserva as respostas de autentica├º├úo, conta ausente e confirma├º├úo de senha
+  ---
+  duration_ms: 192.2059
+  ...
+# Subtest: a rota executa o coordenador e todos os reposit├│rios recebem a mesma transa├º├úo
+ok 2 - a rota executa o coordenador e todos os reposit├│rios recebem a mesma transa├º├úo
+  ---
+  duration_ms: 15.0489
+  ...
+# Subtest: exclus├úo de conta em MySQL descart├ível
+ok 3 - exclus├úo de conta em MySQL descart├ível # SKIP
+  ---
+  duration_ms: 2.6673
+  ...
+# Subtest: contratos v2 e recupera├º├úo das telas em MySQL descart├ível
+ok 4 - contratos v2 e recupera├º├úo das telas em MySQL descart├ível # SKIP
+  ---
+  duration_ms: 1.4214
+  ...
+# Subtest: as rotas privadas mant├¬m a exig├¬ncia de login
+ok 5 - as rotas privadas mant├¬m a exig├¬ncia de login
+  ---
+  duration_ms: 77.586
+  ...
+# Subtest: o cadastro preserva a valida├º├úo dos termos e da senha
+ok 6 - o cadastro preserva a valida├º├úo dos termos e da senha
+  ---
+  duration_ms: 33.4894
+  ...
+# Subtest: o login retorna token e dados p├║blicos e privados sem expor a senha
+ok 7 - o login retorna token e dados p├║blicos e privados sem expor a senha
+  ---
+  duration_ms: 32.4375
+  ...
+# Subtest: o controlador repassa o usu├írio autenticado para o servi├ºo
+ok 8 - o controlador repassa o usu├írio autenticado para o servi├ºo
+  ---
+  duration_ms: 7.5021
+  ...
+# Subtest: a publica├º├úo rejeita enquetes inv├ílidas antes de gravar dados
+ok 9 - a publica├º├úo rejeita enquetes inv├ílidas antes de gravar dados
+  ---
+  duration_ms: 9.9432
+  ...
+# Subtest: a edi├º├úo de publica├º├úo e coment├írio continua restrita ao autor
+ok 10 - a edi├º├úo de publica├º├úo e coment├írio continua restrita ao autor
+  ---
+  duration_ms: 10.9005
+  ...
+# Subtest: a busca de destinat├írios alcan├ºa a rota people, antes da rota de conversa
+ok 11 - a busca de destinat├írios alcan├ºa a rota people, antes da rota de conversa
+  ---
+  duration_ms: 6.0207
+  ...
+# Subtest: uma falha no servi├ºo de not├¡cias preserva a resposta de indisponibilidade
+ok 12 - uma falha no servi├ºo de not├¡cias preserva a resposta de indisponibilidade
+  ---
+  duration_ms: 3.141
+  ...
+# Subtest: a interface compilada continua dispon├¡vel nos endere├ºos das telas
+ok 13 - a interface compilada continua dispon├¡vel nos endere├ºos das telas
+  ---
+  duration_ms: 16.5555
+  ...
+# Subtest: opera├º├Áes e limpeza recuper├ível em MySQL descart├ível
+ok 14 - opera├º├Áes e limpeza recuper├ível em MySQL descart├ível # SKIP
+  ---
+  duration_ms: 1.3095
+  ...
+# Subtest: evolu├º├úo do banco por uma sequ├¬ncia ├║nica em MySQL descart├ível
+ok 15 - evolu├º├úo do banco por uma sequ├¬ncia ├║nica em MySQL descart├ível # SKIP
+  ---
+  duration_ms: 1.3572
+  ...
+# Subtest: autores das publica├º├Áes em MySQL descart├ível
+ok 16 - autores das publica├º├Áes em MySQL descart├ível # SKIP
+  ---
+  duration_ms: 1.5385
+  ...
+# Subtest: publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível
+ok 17 - publica├º├úo compartilhada nas tr├¬s telas com MySQL descart├ível # SKIP
+  ---
+  duration_ms: 3.5522
+  ...
+# Subtest: limita somente as requisi├º├Áes feitas para a API
+ok 18 - limita somente as requisi├º├Áes feitas para a API
+  ---
+  duration_ms: 152.5816
+  ...
+# Subtest: o coordenador depende das opera├º├Áes p├║blicas, sem HTTP nem acesso direto a modelos
+ok 19 - o coordenador depende das opera├º├Áes p├║blicas, sem HTTP nem acesso direto a modelos
+  ---
+  duration_ms: 4.329
+  ...
+# Subtest: cada reposit├│rio de exclus├úo acessa somente os modelos do seu m├│dulo
+ok 20 - cada reposit├│rio de exclus├úo acessa somente os modelos do seu m├│dulo
+  ---
+  duration_ms: 15.761
+  ...
+# Subtest: contratos compartilhados n├úo dependem da interface, do HTTP ou do banco
+ok 21 - contratos compartilhados n├úo dependem da interface, do HTTP ou do banco
+  ---
+  duration_ms: 6.4969
+  ...
+# Subtest: telas e funcionalidades recebem dados tipados pelo transporte comum
+ok 22 - telas e funcionalidades recebem dados tipados pelo transporte comum
+  ---
+  duration_ms: 17.6425
+  ...
+# Subtest: contratos da interface: dados validados, falhas, sess├úo e cancelamento
+    # Subtest: login v2 envia JSON sem token antigo e devolve dados p├║blicos
+    ok 1 - login v2 envia JSON sem token antigo e devolve dados p├║blicos
+      ---
+      duration_ms: 70.2966
+      ...
+    # Subtest: publicar preserva FormData e valida a publica├º├úo recebida
+    ok 2 - publicar preserva FormData e valida a publica├º├úo recebida
+      ---
+      duration_ms: 3.0221
+      ...
+    # Subtest: enquete e coment├írio validam seus resultados antes da tela
+    ok 3 - enquete e coment├írio validam seus resultados antes da tela
+      ---
+      duration_ms: 2.2574
+      ...
+    # Subtest: seguir envia estado desejado e nome codificado
+    ok 4 - seguir envia estado desejado e nome codificado
+      ---
+      duration_ms: 1.7269
+      ...
+    # Subtest: listagem entrega p├ígina e encaminha cancelamento ao transporte
+    ok 5 - listagem entrega p├ígina e encaminha cancelamento ao transporte
+      ---
+      duration_ms: 1.4919
+      ...
+    # Subtest: objeto de erro ou item incompleto n├úo passa por lista v├ílida
+    ok 6 - objeto de erro ou item incompleto n├úo passa por lista v├ílida
+      ---
+      duration_ms: 4.2192
+      ...
+    # Subtest: HTML inesperado e JSON de erro inv├ílido resultam em falha controlada
+    ok 7 - HTML inesperado e JSON de erro inv├ílido resultam em falha controlada
+      ---
+      duration_ms: 3.5258
+      ...
+    # Subtest: senha incorreta preserva a sess├úo; sess├úo inv├ílida limpa credenciais
+    ok 8 - senha incorreta preserva a sess├úo; sess├úo inv├ílida limpa credenciais
+      ---
+      duration_ms: 2.1788
+      ...
+    # Subtest: falha antiga de outra sess├úo n├úo apaga o novo login
+    ok 9 - falha antiga de outra sess├úo n├úo apaga o novo login
+      ---
+      duration_ms: 2.9467
+      ...
+    # Subtest: cancelamento mant├®m AbortError e queda de rede permite tentativa expl├¡cita
+    ok 10 - cancelamento mant├®m AbortError e queda de rede permite tentativa expl├¡cita
+      ---
+      duration_ms: 1.971
+      ...
+    1..10
+ok 23 - contratos da interface: dados validados, falhas, sess├úo e cancelamento
+  ---
+  duration_ms: 102.2739
+  ...
+# Subtest: limites e valida├º├úo comuns impedem diverg├¬ncia entre criar e editar
+ok 24 - limites e valida├º├úo comuns impedem diverg├¬ncia entre criar e editar
+  ---
+  duration_ms: 1.2533
+  ...
+# Subtest: a confirma├º├úo de exclus├úo preserva as valida├º├Áes e n├úo devolve o hash da senha
+    # Subtest: conta ausente
+    ok 1 - conta ausente
+      ---
+      duration_ms: 2.061
+      ...
+    # Subtest: senha ausente
+    ok 2 - senha ausente
+      ---
+      duration_ms: 0.2925
+      ...
+    # Subtest: senha incorreta
+    ok 3 - senha incorreta
+      ---
+      duration_ms: 0.3037
+      ...
+    # Subtest: senha correta
+    ok 4 - senha correta
+      ---
+      duration_ms: 2.9394
+      ...
+    1..4
+ok 25 - a confirma├º├úo de exclus├úo preserva as valida├º├Áes e n├úo devolve o hash da senha
+  ---
+  duration_ms: 8.3315
+  ...
+# Subtest: a exclus├úo coordena os m├│dulos e s├│ limpa imagens depois da confirma├º├úo do banco
+ok 26 - a exclus├úo coordena os m├│dulos e s├│ limpa imagens depois da confirma├º├úo do banco
+  ---
+  duration_ms: 0.9237
+  ...
+# Subtest: a senha rejeitada impede a abertura da opera├º├úo de remo├º├úo
+ok 27 - a senha rejeitada impede a abertura da opera├º├úo de remo├º├úo
+  ---
+  duration_ms: 0.4108
+  ...
+# Subtest: uma falha de m├│dulo interrompe a exclus├úo e conserva as imagens
+ok 28 - uma falha de m├│dulo interrompe a exclus├úo e conserva as imagens
+  ---
+  duration_ms: 0.5067
+  ...
+# Subtest: falha de limpeza ap├│s o commit n├úo transforma uma conta j├í exclu├¡da em erro
+ok 29 - falha de limpeza ap├│s o commit n├úo transforma uma conta j├í exclu├¡da em erro
+  ---
+  duration_ms: 1.4939
+  ...
+# Subtest: o autor mant├®m as permiss├Áes atuais
+ok 30 - o autor mant├®m as permiss├Áes atuais
+  ---
+  duration_ms: 6.677
+  ...
+# Subtest: outro usu├írio continua sem permiss├úo sobre conte├║do de outro usu├írio
+ok 31 - outro usu├írio continua sem permiss├úo sobre conte├║do de outro usu├írio
+  ---
+  duration_ms: 0.4135
+  ...
+# Subtest: um visitante n├úo recebe permiss├Áes de coment├írio
+ok 32 - um visitante n├úo recebe permiss├Áes de coment├írio
+  ---
+  duration_ms: 0.3299
+  ...
+# Subtest: publica├º├Áes usam o perfil atual e consultam cada autor uma ├║nica vez no lote
+ok 33 - publica├º├Áes usam o perfil atual e consultam cada autor uma ├║nica vez no lote
+  ---
+  duration_ms: 1.8038
+  ...
+# Subtest: uma nova leitura reflete a troca do perfil sem modificar publica├º├Áes
+ok 34 - uma nova leitura reflete a troca do perfil sem modificar publica├º├Áes
+  ---
+  duration_ms: 0.3615
+  ...
+# Subtest: uma refer├¬ncia inv├ílida n├úo exp├Áe c├│pias antigas nem quebra a listagem
+ok 35 - uma refer├¬ncia inv├ílida n├úo exp├Áe c├│pias antigas nem quebra a listagem
+  ---
+  duration_ms: 0.1745
+  ...
+# Subtest: uma lista vazia n├úo consulta autores
+ok 36 - uma lista vazia n├úo consulta autores
+  ---
+  duration_ms: 0.1292
+  ...
+# Subtest: o modelo persistido da publica├º├úo n├úo possui nome nem foto do autor
+ok 37 - o modelo persistido da publica├º├úo n├úo possui nome nem foto do autor
+  ---
+  duration_ms: 0.201
+  ...
+# Subtest: feed, perfil e salvos usam a entrada p├║blica da funcionalidade e o mesmo PostCard
+ok 38 - feed, perfil e salvos usam a entrada p├║blica da funcionalidade e o mesmo PostCard
+  ---
+  duration_ms: 3.9247
+  ...
+# Subtest: curtida e edi├º├úo alteram a mesma publica├º├úo nas tr├¬s listas
+ok 39 - curtida e edi├º├úo alteram a mesma publica├º├úo nas tr├¬s listas
+  ---
+  duration_ms: 2.2388
+  ...
+# Subtest: remover dos salvos n├úo remove a publica├º├úo do feed ou do perfil
+ok 40 - remover dos salvos n├úo remove a publica├º├úo do feed ou do perfil
+  ---
+  duration_ms: 1.2037
+  ...
+# Subtest: a exclus├úo remove a publica├º├úo de todas as listas e uma resposta atrasada n├úo a recria
+ok 41 - a exclus├úo remove a publica├º├úo de todas as listas e uma resposta atrasada n├úo a recria
+  ---
+  duration_ms: 0.4233
+  ...
+# Subtest: uma leitura iniciada antes da intera├º├úo n├úo desfaz a curtida nem a remo├º├úo dos salvos
+ok 42 - uma leitura iniciada antes da intera├º├úo n├úo desfaz a curtida nem a remo├º├úo dos salvos
+  ---
+  duration_ms: 0.5441
+  ...
+# Subtest: as listas mant├¬m sua ordem e remover a enquete preserva a publica├º├úo
+ok 43 - as listas mant├¬m sua ordem e remover a enquete preserva a publica├º├úo
+  ---
+  duration_ms: 0.4772
+  ...
+# Subtest: backend armazena foto de perfil enviada como Data URL
+ok 44 - backend armazena foto de perfil enviada como Data URL
+  ---
+  duration_ms: 70.8194
+  ...
+# Subtest: backend mant├®m uma URL de avatar j├í armazenada
+ok 45 - backend mant├®m uma URL de avatar j├í armazenada
+  ---
+  duration_ms: 0.604
+  ...
+# Subtest: backend rejeita conte├║do que n├úo corresponde a uma imagem
+ok 46 - backend rejeita conte├║do que n├úo corresponde a uma imagem
+  ---
+  duration_ms: 0.4896
+  ...
+# Subtest: backend armazena imagem de capa enviada como Data URL
+ok 47 - backend armazena imagem de capa enviada como Data URL
+  ---
+  duration_ms: 66.898
+  ...
+# Subtest: usa Multer 2.2.0 ou superior
+ok 48 - usa Multer 2.2.0 ou superior
+  ---
+  duration_ms: 1.5899
+  ...
+1..48
+# tests 62
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 6
+# todo 0
+# duration_ms 2642.8555

@@ -1,0 +1,131 @@
+name: Testes da reengenharia
+
+on:
+  push:
+    branches:
+      - reengenharia-arquitetural
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificacao-geral:
+    name: Compilação e testes gerais
+    runs-on: windows-2022
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: sistema
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: sistema/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Executar compilação e testes gerais
+        run: npm test
+
+  seis-casos:
+    name: '${{ matrix.nome }}'
+    runs-on: windows-2022
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        include:
+          - nome: 1 — Exclusão de contas
+            suite: account-deletion
+          - nome: 2 — Dados do autor
+            suite: post-authors
+          - nome: 3 — Publicações nas três telas
+            suite: post-interface
+          - nome: 4 — Preparação do banco
+            suite: database-migrations
+          - nome: 5 — Ações com notificações
+            suite: atomic-operations
+          - nome: 6 — Respostas do servidor
+            suite: api-contracts
+    defaults:
+      run:
+        shell: pwsh
+        working-directory: sistema
+    env:
+      SWIFTLINE_DATABASE_SNAPSHOT: ''
+    steps:
+      - name: Obter o código
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Preparar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: sistema/package-lock.json
+      - name: Instalar dependências
+        run: npm ci
+      - name: Localizar MySQL do executor
+        run: |
+          $mysqlCommand = Get-Command mysqld.exe -ErrorAction SilentlyContinue
+          $mysqlBinary = if ($mysqlCommand) { $mysqlCommand.Source } else { $null }
+          if (-not $mysqlBinary) {
+            $mysqlRoots = @('C:\Program Files\MySQL', 'C:\tools', 'C:\mysql')
+            $mysqlBinary = $mysqlRoots | Where-Object { Test-Path -LiteralPath $_ } |
+              ForEach-Object { Get-ChildItem -LiteralPath $_ -Filter mysqld.exe -File -Recurse -ErrorAction SilentlyContinue } |
+              Select-Object -First 1 -ExpandProperty FullName
+          }
+          if (-not $mysqlBinary) { throw 'mysqld.exe não foi encontrado no executor Windows.' }
+          "MYSQLD_BINARY=$mysqlBinary" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          & $mysqlBinary --version
+      - name: Preparar navegador, se necessário
+        run: |
+          if (-not (Test-Path -LiteralPath 'C:\Program Files\Google\Chrome\Application\chrome.exe')) {
+            npx playwright install chromium
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Compilar interface
+        run: npm run build
+      - name: Compilar servidor e testes
+        run: npm run build:server
+      - name: Executar o caso com MySQL descartável
+        run: node scripts/test-account-deletion-mysql.mjs ${{ matrix.suite }}
+      - name: Registrar resultado da execução
+        if: always()
+        env:
+          SWIFTLINE_CI_SUITE: ${{ matrix.suite }}
+          SWIFTLINE_CI_TITLE: ${{ matrix.nome }}
+        run: |
+          $reportPath = Join-Path 'test-results' ($env:SWIFTLINE_CI_SUITE + '-mysql.json')
+          $summary = @(('## ' + $env:SWIFTLINE_CI_TITLE), '')
+          if (Test-Path -LiteralPath $reportPath) {
+            $report = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json
+            $approved = [regex]::Match($report.output, '(?m)^# pass (\d+)\s*$').Groups[1].Value
+            $failed = [regex]::Match($report.output, '(?m)^# fail (\d+)\s*$').Groups[1].Value
+            $skipped = [regex]::Match($report.output, '(?m)^# skipped (\d+)\s*$').Groups[1].Value
+            if (-not $report.passed -or -not $report.isolated -or $approved -eq '' -or $failed -ne '0') {
+              throw 'O relatório não confirma uma execução aprovada em banco isolado.'
+            }
+            $summary += @('| Aprovados | Falhas | Não executados |', '| ---: | ---: | ---: |', "| $approved | $failed | $skipped |", '', ('MySQL: ' + $report.version))
+            if ([int]$skipped -gt 0) { $summary += 'Os cenários opcionais de cópia da base local não participam desta execução.' }
+          } else {
+            $summary += 'Este caso não produziu relatório de aprovação. Consulte a etapa que falhou.'
+          }
+          $summary | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+      - name: Guardar os resultados reais
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: resultado-${{ matrix.suite }}
+          path: sistema/test-results/
+          if-no-files-found: ignore
+          retention-days: 30

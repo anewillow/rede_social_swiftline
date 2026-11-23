@@ -1,0 +1,36 @@
+TAP version 13
+# Subtest: exclusão de conta em MySQL descartável
+    # Subtest: a rota exclui todos os dados relacionados e preserva os dados das outras pessoas
+    ok 1 - a rota exclui todos os dados relacionados e preserva os dados das outras pessoas
+      ---
+      duration_ms: 438.2697
+      ...
+    # Subtest: uma falha depois de remover conteúdo e mensagens desfaz todas as alterações no banco
+    ok 2 - uma falha depois de remover conteúdo e mensagens desfaz todas as alterações no banco
+      ---
+      duration_ms: 550.7882
+      ...
+    # Subtest: senha incorreta não altera registros nem remove as imagens
+    ok 3 - senha incorreta não altera registros nem remove as imagens
+      ---
+      duration_ms: 156.4241
+      ...
+    # Subtest: a exclusão também funciona para uma conta sem publicações ou interações
+    ok 4 - a exclusão também funciona para uma conta sem publicações ou interações
+      ---
+      duration_ms: 127.223
+      ...
+    1..4
+ok 1 - exclusão de conta em MySQL descartável
+  ---
+  duration_ms: 7605.7483
+  ...
+1..1
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 7848.3171

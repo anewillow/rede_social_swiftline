@@ -1,0 +1,5 @@
+    await sequelize.authenticate();
+    console.log('MySQL conectado');
+    await assertDatabaseReady();
+    startImageMaintenance();
+    app.listen(port, () => console.log(`Swiftline está online em http://localhost:${port}`));

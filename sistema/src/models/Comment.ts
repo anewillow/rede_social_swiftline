@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from './db.js';
+import sequelize from '../config/database.js';
 
 export class Comment extends Model { declare id: number; declare content: string; declare userId: number; declare postId: number; declare createdAt: Date; }
 Comment.init({

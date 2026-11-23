@@ -1,0 +1,1 @@
+    return res.status(401).json({ error: 'Entre na sua conta para ver quem você segue.' });

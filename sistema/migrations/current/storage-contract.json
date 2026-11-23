@@ -1,0 +1,15 @@
+{
+  "file_cleanup_jobs": {
+    "name": "file_cleanup_jobs",
+    "columns": {
+      "fileKey": { "type": "VARCHAR(120)", "allowNull": false, "defaultValue": null, "autoIncrement": false },
+      "attempts": { "type": "INT", "allowNull": false, "defaultValue": "0", "autoIncrement": false },
+      "availableAt": { "type": "DATETIME", "allowNull": false, "defaultValue": null, "autoIncrement": false },
+      "lastError": { "type": "VARCHAR(100)", "allowNull": true, "defaultValue": null, "autoIncrement": false },
+      "createdAt": { "type": "DATETIME", "allowNull": false, "defaultValue": null, "autoIncrement": false },
+      "updatedAt": { "type": "DATETIME", "allowNull": false, "defaultValue": null, "autoIncrement": false }
+    },
+    "indexes": [{ "primary": true, "fields": ["fileKey"] }],
+    "references": []
+  }
+}

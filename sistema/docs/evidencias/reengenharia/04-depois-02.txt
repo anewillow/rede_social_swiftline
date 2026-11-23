@@ -1,0 +1,3 @@
+    } else if (operation === 'migrate') {
+      const executed = await migrateDatabase(connection);
+      console.log(executed.length ? 'Migrações aplicadas: ' + executed.join(', ') : 'O banco já está atualizado.');

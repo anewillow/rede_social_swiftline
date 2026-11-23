@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sequelize from './db.js';
+import sequelize from '../config/database.js';
 
 export class CommentLike extends Model { declare id: number; declare userId: number; declare commentId: number; }
 CommentLike.init({

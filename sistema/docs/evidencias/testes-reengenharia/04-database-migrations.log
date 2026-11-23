@@ -1,0 +1,61 @@
+TAP version 13
+# Subtest: evolução do banco por uma sequência única em MySQL descartável
+    # Subtest: consultar ou iniciar uma base vazia não cria tabelas
+    ok 1 - consultar ou iniciar uma base vazia não cria tabelas
+      ---
+      duration_ms: 1694.0394
+      ...
+    # Subtest: instalação vazia cria as 13 tabelas, chaves e relacionamentos sem sync
+    ok 2 - instalação vazia cria as 13 tabelas, chaves e relacionamentos sem sync
+      ---
+      duration_ms: 6218.0257
+      ...
+    # Subtest: um arquivo alterado ou uma versão futura bloqueia a abertura e a atualização
+    ok 3 - um arquivo alterado ou uma versão futura bloqueia a abertura e a atualização
+      ---
+      duration_ms: 3166.8002
+      ...
+    # Subtest: falha após DDL parcial fica registrada e a nova execução retoma a etapa
+    ok 4 - falha após DDL parcial fica registrada e a nova execução retoma a etapa
+      ---
+      duration_ms: 6355.9643
+      ...
+    # Subtest: duas atualizações não executam migrações ao mesmo tempo
+    ok 5 - duas atualizações não executam migrações ao mesmo tempo
+      ---
+      duration_ms: 4478.5222
+      ...
+    # Subtest: alteração de estrutura fora da sequência bloqueia a abertura sem reparo automático
+    ok 6 - alteração de estrutura fora da sequência bloqueia a abertura sem reparo automático
+      ---
+      duration_ms: 2032.8365
+      ...
+    # Subtest: adoção confere a estrutura e os dados antes de registrar a versão
+    ok 7 - adoção confere a estrutura e os dados antes de registrar a versão
+      ---
+      duration_ms: 2661.4615
+      ...
+    # Subtest: base anterior recebe capa, enquetes e autoria atual pelo mesmo comando
+    ok 8 - base anterior recebe capa, enquetes e autoria atual pelo mesmo comando
+      ---
+      duration_ms: 5292.5912
+      ...
+    # Subtest: cópia da base local mantém todas as linhas e definições após adoção
+    ok 9 - cópia da base local mantém todas as linhas e definições após adoção # SKIP
+      ---
+      duration_ms: 0.3813
+      ...
+    1..9
+ok 1 - evolução do banco por uma sequência única em MySQL descartável
+  ---
+  duration_ms: 32130.9217
+  ...
+1..1
+# tests 10
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 1
+# todo 0
+# duration_ms 32226.9685

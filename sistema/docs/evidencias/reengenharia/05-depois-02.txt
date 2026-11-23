@@ -1,0 +1,5 @@
+  return {
+    async run(operation) {
+      return database.transaction((transaction) => operation(createScope(transaction)));
+    },
+  };

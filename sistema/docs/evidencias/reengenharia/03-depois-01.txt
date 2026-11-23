@@ -1,0 +1,1 @@
+        {posts.map((post, index) => <PostCard key={post.id} post={post} currentUserId={user.id} openProfile={openProfile} era={eras[index % eras.length]} />)}

@@ -1,0 +1,4 @@
+  try {
+    await sequelize.authenticate();
+    console.log('MySQL conectado');
+    await sequelize.sync();

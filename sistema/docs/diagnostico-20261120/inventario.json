@@ -1,0 +1,831 @@
+{
+  "summary": {
+    "src": 66,
+    "client": 38,
+    "tests": 7,
+    "migrations": 8,
+    "scripts": 1,
+    "configuracao": 5
+  },
+  "records": [
+    {
+      "file": "src/app.ts",
+      "area": "src",
+      "lines": 20,
+      "sha256": "c0a39d5148236fabb301502b548f816127903f7aabcbaa59a2113248202dc80c"
+    },
+    {
+      "file": "src/config/database.ts",
+      "area": "src",
+      "lines": 10,
+      "sha256": "c0e21b5926542eaa5f089d5248c114ac1127b163c0c0df30b6ba18c154c6ba31"
+    },
+    {
+      "file": "src/config/paths.ts",
+      "area": "src",
+      "lines": 5,
+      "sha256": "1906a23dc04e01ce9ce161fe15fb4393ba005ded822ebc44ed629ee0f10187e8"
+    },
+    {
+      "file": "src/config/rate-limit.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "582321394166b2605885093be16bb02a1f30de3b85f1cdf399463980481712a0"
+    },
+    {
+      "file": "src/controllers/account-controller.ts",
+      "area": "src",
+      "lines": 4,
+      "sha256": "7b2fcf322e84d6d76548f8c0076a5daeaba3690585c4d5165c0bbb71d404ca9c"
+    },
+    {
+      "file": "src/controllers/auth-controller.ts",
+      "area": "src",
+      "lines": 6,
+      "sha256": "46658d3ca2c8460e0b6da376f9e3fce93ec4800e39be6d1a3064e620fcaa06f7"
+    },
+    {
+      "file": "src/controllers/comments-controller.ts",
+      "area": "src",
+      "lines": 8,
+      "sha256": "18695b620c4d20b742460ee22e04abb0f338c8612b3e5f3aaeadf6ddfab98947"
+    },
+    {
+      "file": "src/controllers/discovery-controller.ts",
+      "area": "src",
+      "lines": 6,
+      "sha256": "04eb794a56c3431b43faa2296a8ca0c39f6681a5424b8e9dedd5a18b9de447f4"
+    },
+    {
+      "file": "src/controllers/follow-controller.ts",
+      "area": "src",
+      "lines": 6,
+      "sha256": "3f001f32b07e90ff3e04d20b0093643cf46ea93498fc8606137824765cbd5950"
+    },
+    {
+      "file": "src/controllers/handle.ts",
+      "area": "src",
+      "lines": 15,
+      "sha256": "d0c302eda953183f1161a1f0b4274317f045bdab2bf387af3dbb57efa5c38b76"
+    },
+    {
+      "file": "src/controllers/messages-controller.ts",
+      "area": "src",
+      "lines": 6,
+      "sha256": "51c2eca86c1e17f7dc1e841e8fe73ef1ec17edaf34156232ca45fd585e48d3c2"
+    },
+    {
+      "file": "src/controllers/notifications-controller.ts",
+      "area": "src",
+      "lines": 5,
+      "sha256": "ea9032e216cbb55b40a4a05a38fb48cc907ed4b0e073487731d707b976b98db0"
+    },
+    {
+      "file": "src/controllers/polls-controller.ts",
+      "area": "src",
+      "lines": 6,
+      "sha256": "05947de8f1a7ad7855139886dcc4ff9554ada22511420f121a3eaf8c7a71a20e"
+    },
+    {
+      "file": "src/controllers/posts-controller.ts",
+      "area": "src",
+      "lines": 13,
+      "sha256": "502efb6c53356a4ac4f2e1a3bb84a643c401dfb20b2490d5b13cbdc0b212cd69"
+    },
+    {
+      "file": "src/controllers/profile-controller.ts",
+      "area": "src",
+      "lines": 4,
+      "sha256": "15aa41f469150d305a83cf658878963a2c404a0c3e55a053528c8875dac10ba1"
+    },
+    {
+      "file": "src/controllers/users-controller.ts",
+      "area": "src",
+      "lines": 8,
+      "sha256": "d8b5015ad6d975f0f1799f4927d3963a30065b4500d7c7167de04121464d5afa"
+    },
+    {
+      "file": "src/middleware/auth.ts",
+      "area": "src",
+      "lines": 18,
+      "sha256": "0c4c9dcf027e67dca9f33270679e4ea8071ffa9a9592584132e80d91c086cbdd"
+    },
+    {
+      "file": "src/middleware/payload-error.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "7d41ae1d2291d3d8274f9396d528cebe1c25bad12bfa0cb64f2d17d43bc3b7b0"
+    },
+    {
+      "file": "src/middleware/upload.ts",
+      "area": "src",
+      "lines": 12,
+      "sha256": "c28ff7a9c6a746a8f03090951e78d8bea0e82a335779b9715c8ca1b04bf909ab"
+    },
+    {
+      "file": "src/models/Comment.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "cc7c6221b7643a7fa456fef1d8fc132903cd9c788d62c48a29bbd0f23020c76a"
+    },
+    {
+      "file": "src/models/CommentLike.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "1f45c346fd86eac237dd600b4e069a351ffe19f29fa45f01fb78373b006733ad"
+    },
+    {
+      "file": "src/models/Follow.ts",
+      "area": "src",
+      "lines": 8,
+      "sha256": "f422ad066c27a8989749d2d46f52a9268930fc73262c08fc58960a169bb6f800"
+    },
+    {
+      "file": "src/models/index.ts",
+      "area": "src",
+      "lines": 59,
+      "sha256": "e457dc2dba4c935dd21f1da90f9e7ac17d6cfe672c55d1d168e3501f13e51fa5"
+    },
+    {
+      "file": "src/models/Like.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "bcf5afba28745acdf26636f121dd02f3600e4e9465b67cd551badde839c5ec90"
+    },
+    {
+      "file": "src/models/Message.ts",
+      "area": "src",
+      "lines": 17,
+      "sha256": "780b739ce5b1c7bd82ed7d2808cbe8e1283ad724d530db1a20ea927ad42a0270"
+    },
+    {
+      "file": "src/models/Notification.ts",
+      "area": "src",
+      "lines": 21,
+      "sha256": "0ef172e2d0c20b2bfe4cfac8bc450ae94807b8440bf24ada90f9d55e02ae9d48"
+    },
+    {
+      "file": "src/models/PollOption.ts",
+      "area": "src",
+      "lines": 19,
+      "sha256": "9b572bf0d1388b93694c83f18d62c1daf3dfe1ef8c471bbccd485d25b056fc85"
+    },
+    {
+      "file": "src/models/PollVote.ts",
+      "area": "src",
+      "lines": 25,
+      "sha256": "7dab3c41ecf61c52ef03dddf3f1e033e8ff062d1efd88157443d2829e184b77a"
+    },
+    {
+      "file": "src/models/Post.ts",
+      "area": "src",
+      "lines": 27,
+      "sha256": "1603ff8e6e046308cc6a2442827a49505b83b2816bbedcc9fb9f038da1ce12aa"
+    },
+    {
+      "file": "src/models/PostView.ts",
+      "area": "src",
+      "lines": 14,
+      "sha256": "75d5af85b9f9ad5685af54423139eab9d8972dd97c415979e2bbfc50c8a41517"
+    },
+    {
+      "file": "src/models/Repost.ts",
+      "area": "src",
+      "lines": 14,
+      "sha256": "52f52db9d2972e92ab704eb49c917418b2eed547648a5b9b04288d74f358b121"
+    },
+    {
+      "file": "src/models/SavedPost.ts",
+      "area": "src",
+      "lines": 14,
+      "sha256": "d044ae7da46aee3869e6efde8c3931918e7c7a82850ffbb93dce1e9b893cf509"
+    },
+    {
+      "file": "src/models/User.ts",
+      "area": "src",
+      "lines": 24,
+      "sha256": "f9cbde42a1a0ddcece5263f7fb7a7ef65ab4e1130317bc9da99ffde386447d19"
+    },
+    {
+      "file": "src/routes/account-routes.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "6da72518b13759698dd89c23e4047cba5008b615f241ba6c04f2a72fee518b0d"
+    },
+    {
+      "file": "src/routes/auth-routes.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "f7a16d83f8aa4cc0c0899b393559be59aa9b9ae46dd3150a0d62db777894d22e"
+    },
+    {
+      "file": "src/routes/comments-routes.ts",
+      "area": "src",
+      "lines": 13,
+      "sha256": "1e175b70479265753a4d0f6e4eb35ccca2cde1431c928fbee9d63d6e1701caae"
+    },
+    {
+      "file": "src/routes/discovery-routes.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "6672d0674e8270bd4ad3febd13674c757aa73b3b9b6fa0f0e7344ed7716c03c7"
+    },
+    {
+      "file": "src/routes/follow-routes.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "117842ea6645cc53026b114ee9df472cc11552943217fd1300cd54cef23cb151"
+    },
+    {
+      "file": "src/routes/index.ts",
+      "area": "src",
+      "lines": 27,
+      "sha256": "3df9a30571de15dd839a001e7f26adcbe540339412255eb59ac637696696af36"
+    },
+    {
+      "file": "src/routes/messages-routes.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "a376b479924b23c4d367539d0558e0bd47f681156c1a4ed6dc218ba3d976bb75"
+    },
+    {
+      "file": "src/routes/notifications-routes.ts",
+      "area": "src",
+      "lines": 10,
+      "sha256": "14cced625dd86f9460b83e920b2271369d893ab59642af179b71d8fe89977e2f"
+    },
+    {
+      "file": "src/routes/polls-routes.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "47022a3212fcc7cbf95f05199e61a44b19ad4c94a8cf6c209acdfb327a83ff58"
+    },
+    {
+      "file": "src/routes/posts-routes.ts",
+      "area": "src",
+      "lines": 19,
+      "sha256": "4378f65f484480158b03ba6d10b8af5f28b6d5fe7da77095e41c2d751604b8b9"
+    },
+    {
+      "file": "src/routes/profile-routes.ts",
+      "area": "src",
+      "lines": 9,
+      "sha256": "f7a6259f4ccdb20ab84fb3096f3efd66819baf14d15ccfbc1efb235c6e3174e7"
+    },
+    {
+      "file": "src/routes/users-routes.ts",
+      "area": "src",
+      "lines": 13,
+      "sha256": "7f0d3eaa8d62c7d848f5d06f09020015e177a36e334c1b8ac1a89f75909ed14d"
+    },
+    {
+      "file": "src/server.ts",
+      "area": "src",
+      "lines": 29,
+      "sha256": "8ba87fb2879150f7402c4c5c6c51a7cfb790a91023023eab41c22c1236ea0f38"
+    },
+    {
+      "file": "src/services/account-service.ts",
+      "area": "src",
+      "lines": 119,
+      "sha256": "3bee6831f2fa4ac967148681f57c3e471e0bf81d52f25efb373fad9571d236dc"
+    },
+    {
+      "file": "src/services/auth-service.ts",
+      "area": "src",
+      "lines": 52,
+      "sha256": "c1f10eb7671e65589d12c5239f16d181d0bad150666541ba43b47c2aa50bd886"
+    },
+    {
+      "file": "src/services/comments-service.ts",
+      "area": "src",
+      "lines": 69,
+      "sha256": "ff1f22d77cddd47221a18edd175ba7ab2b16a9762574ba870cca44221f8be966"
+    },
+    {
+      "file": "src/services/discovery-service.ts",
+      "area": "src",
+      "lines": 62,
+      "sha256": "8addf836e4580c552019b6714b3aeb08bac3cdbf68ee279bb3dacefc98a89da9"
+    },
+    {
+      "file": "src/services/follow-service.ts",
+      "area": "src",
+      "lines": 43,
+      "sha256": "b39591f26632ab02e9b54328cba5aa392361cde6f7b6ae9b9f20e8382c54728a"
+    },
+    {
+      "file": "src/services/messages-service.ts",
+      "area": "src",
+      "lines": 45,
+      "sha256": "d7223d63fada994b4a519bcd45bdad9581e6292dfd6a3cc7e6f7476e956ce941"
+    },
+    {
+      "file": "src/services/news-service.ts",
+      "area": "src",
+      "lines": 99,
+      "sha256": "834c8968cc8201c617f33c97bb9db1859dd6bbe2ba44e27955b919f39ec1c4f1"
+    },
+    {
+      "file": "src/services/notifications-service.ts",
+      "area": "src",
+      "lines": 16,
+      "sha256": "27a11796aa7f13ad340cccce96c3134301d99232ab567b668b3c4a1647f02710"
+    },
+    {
+      "file": "src/services/permissions-service.ts",
+      "area": "src",
+      "lines": 24,
+      "sha256": "7bc45eb4f085b65dd1de7698026b5bc775eee8697ef8df683db8cbb8b97e7818"
+    },
+    {
+      "file": "src/services/polls-service.ts",
+      "area": "src",
+      "lines": 96,
+      "sha256": "ca803867bfb29b2b537ed6f9fa983391756b0e87bbdb985d9e8754881566a493"
+    },
+    {
+      "file": "src/services/post-activity-service.ts",
+      "area": "src",
+      "lines": 79,
+      "sha256": "171ff5cc825aa899f990c2a67d5ef0a862a4552f24740beadf123724c9b41518"
+    },
+    {
+      "file": "src/services/posts-service.ts",
+      "area": "src",
+      "lines": 195,
+      "sha256": "8bbd5981b61a6601c0d1a8a94c9b6b0623fe5c65c60f53cdb620fe5aaaaf33cb"
+    },
+    {
+      "file": "src/services/profile-images-service.ts",
+      "area": "src",
+      "lines": 79,
+      "sha256": "3795e549abe5040c4fabafc19afe5bc7aa863af9df08de628552570bd24a43b3"
+    },
+    {
+      "file": "src/services/profile-service.ts",
+      "area": "src",
+      "lines": 73,
+      "sha256": "665965cc0bd079710892714605614e24b4d03d9decdb95ae4797678edf995f38"
+    },
+    {
+      "file": "src/services/trends-service.ts",
+      "area": "src",
+      "lines": 67,
+      "sha256": "83152cec09d0967304b2f59a9050992407a41290004884316993b49b4eb9e237"
+    },
+    {
+      "file": "src/services/user-presentation.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "eda5e47ad8b4473cc6b68607d607808aee0f513b5ecd3c40341d2135d8ba3081"
+    },
+    {
+      "file": "src/services/users-service.ts",
+      "area": "src",
+      "lines": 50,
+      "sha256": "cf0bc3c8229d70fc86d82aaf23990861ef432b4d09f5d624c03980b9044513a0"
+    },
+    {
+      "file": "src/types/express.d.ts",
+      "area": "src",
+      "lines": 11,
+      "sha256": "d42b98b160bd94842fbbe264278dc148a055b26184c1b05c7fca60947ab0c0bc"
+    },
+    {
+      "file": "src/types/post.ts",
+      "area": "src",
+      "lines": 1,
+      "sha256": "a3a4a871b12cab8ead6c7f91c88420f0585cea0968aa4eb36e24a5c5bd7008ea"
+    },
+    {
+      "file": "src/types/service.ts",
+      "area": "src",
+      "lines": 8,
+      "sha256": "5b69cbc08139e9d3b72b2f9fe4421f3ecc142e912643b59555d55e46eb16392c"
+    },
+    {
+      "file": "client/App.tsx",
+      "area": "client",
+      "lines": 119,
+      "sha256": "30d26aafe242c0a512829b675780c1869134e2a94c1ed514ace0b0cb8207a3de"
+    },
+    {
+      "file": "client/components/common/Avatar.tsx",
+      "area": "client",
+      "lines": 20,
+      "sha256": "e4f9309c285f3047618c6577d9ad1d3ec0575928799b62c7963abde8e16536ca"
+    },
+    {
+      "file": "client/components/common/Empty.tsx",
+      "area": "client",
+      "lines": 11,
+      "sha256": "ce53edb1d5656b79b12ab1651f1b954eddb049d9f3f7b1a8a925d406c2c3fc15"
+    },
+    {
+      "file": "client/components/layout/PeopleRail.tsx",
+      "area": "client",
+      "lines": 50,
+      "sha256": "f655a3aabbd48bea9ee15e7a6a06eeacb8f49b1cd4532058a5f071f90dd5b68e"
+    },
+    {
+      "file": "client/components/layout/RightRail.tsx",
+      "area": "client",
+      "lines": 230,
+      "sha256": "a09d4b037a53ccbc853cb831d8578555f74d8d1760124d7968e5b68afd673afa"
+    },
+    {
+      "file": "client/components/layout/Shell.tsx",
+      "area": "client",
+      "lines": 95,
+      "sha256": "5d826e71417683046d54c1ce210afe5b6934e9f7ac64c632e6f88d948546aa98"
+    },
+    {
+      "file": "client/components/posts/Comments.tsx",
+      "area": "client",
+      "lines": 116,
+      "sha256": "0c6c263007a58254b8d7f9f6f86ba6b35576a6148f4a9400e52800532624725e"
+    },
+    {
+      "file": "client/components/posts/PostActions.tsx",
+      "area": "client",
+      "lines": 129,
+      "sha256": "84228a46471fa2b246255c73c7fc713ebbb756652feb2dd4c416996e2a52699f"
+    },
+    {
+      "file": "client/components/posts/PostOwnerControls.tsx",
+      "area": "client",
+      "lines": 164,
+      "sha256": "989378cc31466dcfdf7d2a15f8bb000fd08c942c0f49679b10a72e2a89a5da55"
+    },
+    {
+      "file": "client/components/posts/PostPoll.tsx",
+      "area": "client",
+      "lines": 278,
+      "sha256": "38e248789b2b140bec370ea614553b4c063ab76e5adff56f7acf5814b7b653f6"
+    },
+    {
+      "file": "client/components/profile/ProfileAvatar.tsx",
+      "area": "client",
+      "lines": 5,
+      "sha256": "e16c830493f6389af85a4d2df969da8f01ba1cb9d1d84a5fec1917e418b94120"
+    },
+    {
+      "file": "client/components/profile/ProfileComments.tsx",
+      "area": "client",
+      "lines": 13,
+      "sha256": "a1422d50f288c88d05ac325961839fcd3b10a2ffae4e02205ad7790f73a03897"
+    },
+    {
+      "file": "client/components/profile/ProfilePostActions.tsx",
+      "area": "client",
+      "lines": 27,
+      "sha256": "46974fa73b2bb330488ef5bb11226fecc255f1b55c66b332a1d856164ca34b8b"
+    },
+    {
+      "file": "client/config/constants.ts",
+      "area": "client",
+      "lines": 3,
+      "sha256": "01f054ade66a021b733e01fade2c52458ca224c3f042d13a6c852f8aea77002d"
+    },
+    {
+      "file": "client/main.tsx",
+      "area": "client",
+      "lines": 10,
+      "sha256": "8c335f3b9d55e29ddaccab3bbace8b82c5e10921a87b66c9c32e69fbb55283dc"
+    },
+    {
+      "file": "client/pages/AccountSettings.tsx",
+      "area": "client",
+      "lines": 191,
+      "sha256": "c220a1f828c7b0fd950141a37f61dd2ffee08ff59f205869806863b3c72f5ee7"
+    },
+    {
+      "file": "client/pages/Auth.tsx",
+      "area": "client",
+      "lines": 175,
+      "sha256": "85123991fc7cc3046ce476ded630aa4b1695cbb517a5b90ac97271edf5abc388"
+    },
+    {
+      "file": "client/pages/Feed.tsx",
+      "area": "client",
+      "lines": 460,
+      "sha256": "3695cdc3ca2889554db075d115935e2a14465b921fe8eb73012bdf800c3456b4"
+    },
+    {
+      "file": "client/pages/Help.tsx",
+      "area": "client",
+      "lines": 168,
+      "sha256": "e399c26869a2f3cf98f984ab09253305a9992ec278c7e16b785c636efcfa23b7"
+    },
+    {
+      "file": "client/pages/Messages.tsx",
+      "area": "client",
+      "lines": 198,
+      "sha256": "9ab51bd62f3d1bbce4dc26bd609d7a58fa9d71d3bdd45b59a8677ff8a93b2d35"
+    },
+    {
+      "file": "client/pages/Network.tsx",
+      "area": "client",
+      "lines": 77,
+      "sha256": "083570e9cbd8006498ca69aaafda3d91cb6e861ca5f5aa6218628d6e9b72904d"
+    },
+    {
+      "file": "client/pages/Notifications.tsx",
+      "area": "client",
+      "lines": 47,
+      "sha256": "076c359881234ab7438baebec3b43be918c093f0b9104af4b4c2c07d98f9f722"
+    },
+    {
+      "file": "client/pages/Profile.tsx",
+      "area": "client",
+      "lines": 156,
+      "sha256": "08be7c0d65af63961a57368165fde07607d6060d1ff016d3708ee852685cc5ad"
+    },
+    {
+      "file": "client/pages/SavedPosts.tsx",
+      "area": "client",
+      "lines": 75,
+      "sha256": "8b711a7457eb7d4ca9a766165bc280159c81877ef84754a3a77f8b68caa704ae"
+    },
+    {
+      "file": "client/pages/SwiftProfile.tsx",
+      "area": "client",
+      "lines": 64,
+      "sha256": "b2ff026fd5a3d35a55899f73caa56a85a007b216de57df2c7b81e76648058ee6"
+    },
+    {
+      "file": "client/services/api.ts",
+      "area": "client",
+      "lines": 14,
+      "sha256": "e602d9ea0dbb7f205674d820acdf05a90151dd864d0adc3eb92d231637525169"
+    },
+    {
+      "file": "client/services/auth-api.ts",
+      "area": "client",
+      "lines": 8,
+      "sha256": "36c9b64cc5952b16663c7a7515009f23bd37106d0452bb1c09881411022082dd"
+    },
+    {
+      "file": "client/services/comments-api.ts",
+      "area": "client",
+      "lines": 8,
+      "sha256": "61d0ef492161193a66f6ece96abfc5a0af12ad7b7f85d13af0b17774464b76db"
+    },
+    {
+      "file": "client/services/discovery-api.ts",
+      "area": "client",
+      "lines": 6,
+      "sha256": "7879d6f7d2462b0e96d2dcadb40d6e3cf74a92ba2d8a93b45306e5d921e7b6ba"
+    },
+    {
+      "file": "client/services/messages-api.ts",
+      "area": "client",
+      "lines": 7,
+      "sha256": "ac1b1ad92456e1c17d56773c64bcc221cd08b14dd0fef9d8703b045e0c808d0a"
+    },
+    {
+      "file": "client/services/notifications-api.ts",
+      "area": "client",
+      "lines": 6,
+      "sha256": "6ea3dbad2ddc155b41c5148c8836d42a2fbec4ad262fdab02e37e21f1ede723f"
+    },
+    {
+      "file": "client/services/posts-api.ts",
+      "area": "client",
+      "lines": 18,
+      "sha256": "38d865525f4925095f94a761f5f17b6187daa6508932ae8b2ffb12ffa50cc52a"
+    },
+    {
+      "file": "client/services/users-api.ts",
+      "area": "client",
+      "lines": 10,
+      "sha256": "6b57a878fb38347ac5c4aac447f19768ecd7c21b60fd618e4127dcc4ce5dab78"
+    },
+    {
+      "file": "client/styles/index.css",
+      "area": "client",
+      "lines": 2053,
+      "sha256": "83314b1cda3f7024346c220b0c9f583c87f10b697c1ad19c54b823ad7d6afd64"
+    },
+    {
+      "file": "client/types/index.ts",
+      "area": "client",
+      "lines": 65,
+      "sha256": "2c570018569b42b517e523618cb6dc5162f55a2f7cf5ab761ab2d1dadf5a24f9"
+    },
+    {
+      "file": "client/utils/format-file-size.ts",
+      "area": "client",
+      "lines": 4,
+      "sha256": "0fa9e77953ee4f5780ea14216f8a7999beaee338fc16b8f179db99c80c5bb75f"
+    },
+    {
+      "file": "client/utils/navigation.ts",
+      "area": "client",
+      "lines": 20,
+      "sha256": "815f308ff2529cf3f9059a3f8e5e084b004a95debe89ba9395ad58051baa7b69"
+    },
+    {
+      "file": "client/vite-env.d.ts",
+      "area": "client",
+      "lines": 0,
+      "sha256": "b440b802c2cfeac6a24eda510bd63c1f23c6ab5c52bcfe3a32a918dbad6b46c8"
+    },
+    {
+      "file": "tests/integration/api-routes.test.ts",
+      "area": "tests",
+      "lines": 124,
+      "sha256": "54c02c69c373468aa69580a700a00f3405aa10cc7e8226c9feb9ac3e8b7bdd9d"
+    },
+    {
+      "file": "tests/integration/rate-limit.test.ts",
+      "area": "tests",
+      "lines": 41,
+      "sha256": "727061b02812ce8e0a9e83659beec7af7e017f118b493c6d52d9d3d5c1070f53"
+    },
+    {
+      "file": "tests/security/multer-version.test.mjs",
+      "area": "tests",
+      "lines": 29,
+      "sha256": "c224f560a7d08bd50d308a06f579b3dbc3efe38b243c803383d73932e0679686"
+    },
+    {
+      "file": "tests/unit/client-api.test.ts",
+      "area": "tests",
+      "lines": 71,
+      "sha256": "03919b59fb769297996fd9068425cbb498728eea0ba8f6d99fe41179f767b48f"
+    },
+    {
+      "file": "tests/unit/permissions.test.ts",
+      "area": "tests",
+      "lines": 38,
+      "sha256": "c945a1482b461be05284dad219f7cdfd6232cc74a77569eec160d2bf9341c6e7"
+    },
+    {
+      "file": "tests/unit/profile-avatar.test.ts",
+      "area": "tests",
+      "lines": 35,
+      "sha256": "96c9b4fde33b67389a27300508379cd0ac7de8c39e8ff9fb2565c3addcf425a7"
+    },
+    {
+      "file": "tests/unit/profile-cover.test.ts",
+      "area": "tests",
+      "lines": 24,
+      "sha256": "856d1db5ef1807b6c9f26f34f96b1ee747a860ccca81399c784c43f1f3459036"
+    },
+    {
+      "file": "migrations/20250826180000-create-comments.js",
+      "area": "migrations",
+      "lines": 66,
+      "sha256": "8e794031317b1fcb32adeb0a9e348b4cf679c9b3e6fbca9a9992b471fd568b23"
+    },
+    {
+      "file": "migrations/20250827180000-create-commentlikes.js",
+      "area": "migrations",
+      "lines": 44,
+      "sha256": "256e7a03f6a2da85293b966460b9ffa9c8499e7cfb82cf678d4cab70f15b7d16"
+    },
+    {
+      "file": "migrations/20250827190000-add-userid-to-posts.js",
+      "area": "migrations",
+      "lines": 15,
+      "sha256": "c2d6589146cba948f2f59facc26f398717ff983ea42b8ff526669b5462dd3f18"
+    },
+    {
+      "file": "migrations/20250830190000-add-avatar-to-posts.js",
+      "area": "migrations",
+      "lines": 14,
+      "sha256": "e2eb0417f8288d27cbff5d9c5231ab996d9c7b49a5df4205a634ce5a95623255"
+    },
+    {
+      "file": "migrations/20250830191000-change-avatar-to-text-in-posts.js",
+      "area": "migrations",
+      "lines": 17,
+      "sha256": "797a3dfdce666454cd654006d075afa9687ee998bea52008c7f547cfca3e1f22"
+    },
+    {
+      "file": "migrations/20251127210000-allow-null-image-content-in-posts.js",
+      "area": "migrations",
+      "lines": 25,
+      "sha256": "5222fe727c959475177bb4a6db882369454bb69be09e0685563080d892c9d397"
+    },
+    {
+      "file": "migrations/20260830000000-add-cover-to-users.js",
+      "area": "migrations",
+      "lines": 19,
+      "sha256": "6c36b7d70fa04c5a5ea21ad00689a537b6218c706cca07049d0d1a8a61c0b451"
+    },
+    {
+      "file": "migrations/20261004000000-create-polls.js",
+      "area": "migrations",
+      "lines": 53,
+      "sha256": "a95f20c964e241d2b4e877ef8beb7c0270b637de374622b0caf00b1c0d1eaf14"
+    },
+    {
+      "file": "scripts/apply-cover-local.mjs",
+      "area": "scripts",
+      "lines": 32,
+      "sha256": "9ae8dc2baf5b4bae9904b06c68b95b6b8ab1a32505409d67bb4b4cebb00d365e"
+    },
+    {
+      "file": "package.json",
+      "area": "configuracao",
+      "lines": 51,
+      "sha256": "ae930ef18c19d17c849cc3c1d8baf36e5109a7cda3ddb6a044159e7ac9bb14f8"
+    },
+    {
+      "file": "tsconfig.json",
+      "area": "configuracao",
+      "lines": 22,
+      "sha256": "a22dfe61344b3bf338fa11a38eac40e68b76057d39d89edb842b8c64ecc002a3"
+    },
+    {
+      "file": "tsconfig.server.json",
+      "area": "configuracao",
+      "lines": 16,
+      "sha256": "32d1b16b4cc324d00e56c2c2b05f4e5c8e5c929695a13dd51ebb8ada223db9a7"
+    },
+    {
+      "file": "vite.config.ts",
+      "area": "configuracao",
+      "lines": 6,
+      "sha256": "299c3268a55fae47d4cbef130c321951c70acf407ce5c2c60d9ef3ec4fb230e0"
+    },
+    {
+      "file": "index.html",
+      "area": "configuracao",
+      "lines": 12,
+      "sha256": "022b95d2d0a0960b1b4b496f7abf9f40f6e69a875d3929d9ba226d2ba3eebf6e"
+    }
+  ],
+  "tests": [
+    {
+      "file": "tests/integration/api-routes.test.ts",
+      "names": [
+        "as rotas privadas mantêm a exigência de login",
+        "o cadastro preserva a validação dos termos e da senha",
+        "o login retorna token e dados públicos e privados sem expor a senha",
+        "o controlador repassa o usuário autenticado para o serviço",
+        "a publicação rejeita enquetes inválidas antes de gravar dados",
+        "a edição de publicação e comentário continua restrita ao autor",
+        "a busca de destinatários alcança a rota people, antes da rota de conversa",
+        "uma falha no serviço de notícias preserva a resposta de indisponibilidade",
+        "a interface compilada continua disponível nos endereços das telas"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/integration/rate-limit.test.ts",
+      "names": [
+        "limita somente as requisições feitas para a API"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/security/multer-version.test.mjs",
+      "names": [
+        "usa Multer 2.2.0 ou superior"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/unit/client-api.test.ts",
+      "names": [
+        "as chamadas da interface preservam os dados, a autenticação e o cancelamento",
+        "o login envia JSON sem incluir um token antigo",
+        "a publicação preserva o FormData e permite o envio de imagem",
+        "a edição de enquete mantém método, opções e pergunta",
+        "seguir e deixar de seguir preservam o nome codificado",
+        "a busca de destinatários preserva o sinal de cancelamento",
+        "editar comentário mantém o identificador e o texto enviado"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/unit/permissions.test.ts",
+      "names": [
+        "o autor mantém as permissões atuais",
+        "outro usuário continua sem permissão sobre conteúdo de outro usuário",
+        "um visitante não recebe permissões de comentário"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/unit/profile-avatar.test.ts",
+      "names": [
+        "backend armazena foto de perfil enviada como Data URL",
+        "backend mantém uma URL de avatar já armazenada",
+        "backend rejeita conteúdo que não corresponde a uma imagem"
+      ],
+      "hasDatabaseConnection": false
+    },
+    {
+      "file": "tests/unit/profile-cover.test.ts",
+      "names": [
+        "backend armazena imagem de capa enviada como Data URL"
+      ],
+      "hasDatabaseConnection": false
+    }
+  ]
+}

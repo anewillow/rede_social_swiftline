@@ -1,11 +1,14 @@
 # Swiftline
 
+[Reengenharia arquitetural](sistema/docs/reengenharia-arquitetural.md) · [Testes no GitHub Actions](sistema/docs/testes-no-github.md)
+
 | Pasta | Conteúdo |
 | --- | --- |
 | [sistema](./sistema/) | Código da aplicação, dependências, migrações e testes. |
 | [trabalho1_manutencao_corretiva](./trabalho1_manutencao_corretiva/) | Relatórios, apresentação e evidências da manutenção corretiva. |
 | [trabalho2_manutencao_preventiva](./trabalho2_manutencao_preventiva/) | Manutenção preventiva. |
 | [trabalho3_manutencao_adaptativa](./trabalho3_manutencao_adaptativa/) | Plano, documentação e evidências da manutenção adaptativa. |
+| [trabalho6_reengenharia](./trabalho6_reengenharia/) | Relatório da reengenharia arquitetural, com trechos do código antes e depois. |
 
 ## Issues, branches e commits
 

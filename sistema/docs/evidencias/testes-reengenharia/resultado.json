@@ -1,0 +1,120 @@
+{
+  "executed_at_manaus": "2026-11-22T22:25:56-04:00",
+  "general": {
+    "tests": 62,
+    "pass": 56,
+    "fail": 0,
+    "skipped": 6,
+    "cancelled": 0
+  },
+  "cases": [
+    {
+      "case": 1,
+      "title": "Exclusão de contas",
+      "suite": "account-deletion",
+      "command": "npm run test:account:mysql",
+      "counts": {
+        "tests": 5,
+        "pass": 5,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "01-account-deletion.log",
+      "source_report": "account-deletion-mysql.json"
+    },
+    {
+      "case": 2,
+      "title": "Dados do autor",
+      "suite": "post-authors",
+      "command": "npm run test:authors:mysql",
+      "counts": {
+        "tests": 7,
+        "pass": 7,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "02-post-authors.log",
+      "source_report": "post-authors-mysql.json"
+    },
+    {
+      "case": 3,
+      "title": "Publicações nas três telas",
+      "suite": "post-interface",
+      "command": "npm run test:posts:mysql",
+      "counts": {
+        "tests": 7,
+        "pass": 7,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "03-post-interface.log",
+      "source_report": "post-interface-mysql.json"
+    },
+    {
+      "case": 4,
+      "title": "Preparação do banco",
+      "suite": "database-migrations",
+      "command": "npm run test:database:mysql",
+      "counts": {
+        "tests": 10,
+        "pass": 9,
+        "fail": 0,
+        "skipped": 1,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "04-database-migrations.log",
+      "source_report": "database-migrations-mysql.json"
+    },
+    {
+      "case": 5,
+      "title": "Ações com notificações",
+      "suite": "atomic-operations",
+      "command": "npm run test:atomic:mysql",
+      "counts": {
+        "tests": 14,
+        "pass": 13,
+        "fail": 0,
+        "skipped": 1,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "05-atomic-operations.log",
+      "source_report": "atomic-operations-mysql.json"
+    },
+    {
+      "case": 6,
+      "title": "Respostas do servidor",
+      "suite": "api-contracts",
+      "command": "npm run test:contracts:mysql",
+      "counts": {
+        "tests": 12,
+        "pass": 11,
+        "fail": 0,
+        "skipped": 1,
+        "cancelled": 0
+      },
+      "mysql_version": "9.6.0",
+      "isolated": true,
+      "log": "06-api-contracts.log",
+      "source_report": "api-contracts-mysql.json"
+    }
+  ],
+  "total_passed": 108,
+  "total_failed": 0,
+  "optional_snapshot_tests_skipped": 3,
+  "application_database_used": false,
+  "test_adjustment": "O teste de edição da enquete passou a aguardar e conferir a resposta HTTP antes de verificar a tela. A abertura da página permite até 15 segundos.",
+  "changed_test_sha256": "bf79e9b62693ffa19727291f380d3cf41fca8f8dbccdb889900f06cffeb3d918"
+}

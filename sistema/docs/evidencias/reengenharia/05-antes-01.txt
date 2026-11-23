@@ -1,0 +1,10 @@
+  const comment = await Comment.create({ postId: post.id, userId: req.userId!, content });
+  if (post.userId !== req.userId) {
+    const actor = await User.findByPk(req.userId);
+    await Notification.create({
+      userId: post.userId,
+      actorId: req.userId!,
+      type: 'comment',
+      message: `${actor?.username ?? 'Alguém'} respondeu à sua publicação.`,
+    });
+  }

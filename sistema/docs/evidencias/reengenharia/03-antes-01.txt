@@ -1,0 +1,8 @@
+            <p className="post-content">{post.content}</p>
+            {post.image && (
+              <img className="post-image" src={post.image} alt="Imagem da publicação" />
+            )}
+            {post.poll && (
+              <PostPoll post={post} onUpdate={updatePost} onPollDeleted={removePoll} />
+            )}
+            <PostActions post={post} currentUserId={user.id} onUpdate={updatePost} />
